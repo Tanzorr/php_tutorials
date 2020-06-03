@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/www/cms" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/www/cms-with-likes" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/www/demo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/www/section-44-cms" vcs="Git" />
   </component>
 </project>

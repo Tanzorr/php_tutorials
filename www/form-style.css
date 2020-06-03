@@ -1,0 +1,74 @@
+#microsite-form {
+    background-color: #011c38;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    width: 100%;
+    max-width: 450px;
+}
+
+#microsite-form input,
+#microsite-form textarea {
+    border: none;
+    margin-bottom: 7px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+#microsite-form .selectize-control,
+#microsite-form .selectize-control div {
+    border: none;
+    margin-bottom: 7px;
+    border-radius: 3px;
+    line-height: 20px;
+}
+
+#microsite-form .selectize-control div.item {
+    padding: 0;
+    overflow: hidden;
+    width: 90%;
+    line-height: 40px;
+    position: relative;
+    top: -9px;
+}
+
+#microsite-form input[type=submit] {
+    color: #fff;
+    margin-top: 3px;
+    margin-bottom: 0;
+    background-color: #ea6645;
+    width: 100%;
+    max-width: 250px;
+    padding: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    font-family: inherit;
+    font-size: 14px;
+    -webkit-font-smoothing: inherit;
+    line-height: 18px;
+    color: #303030;
+}
+
+.loader {
+    display: none;
+    width: 35px;
+    margin: 3px auto 0;
+}
+
+.submit-massage {
+    display: none;
+    font-size: 20px;
+    line-height: 28px;
+    color: #fff;
+}
+.logo-mobile {
+    width: initial;
+}
+@media screen and (max-width: 770px) {
+    .logo-mobile {
+        width: 75px;
+        display: block;
+    }
+}
