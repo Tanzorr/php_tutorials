@@ -6039,6 +6039,8 @@ button.close {
   border-left-color: #999;
   border-left-color: rgba(0, 0, 0, .25);
 }
+
+
 .popover.left > .arrow:after {
   right: 1px;
   bottom: -10px;
@@ -6564,3 +6566,10 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+/* custom style*/
+
+.comment_form{
+  margin-top:40px;
+}

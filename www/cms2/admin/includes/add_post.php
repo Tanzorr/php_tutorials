@@ -13,13 +13,13 @@
         $post_tags =$_POST['post_tags'];
         $post_status = $_POST['post_status'];
         $post_date = date('d-m-y');
-        $post_comment_count =4;
+        //$post_comment_count =4;
 
         move_uploaded_file($post_image_temp,"../images/$post_image");
         $query = "INSERT INTO `posts`( `post_category_id`, `post_title`, `post_author`, `post_image`,
-                           `post_content`, `post_date`, `post_tags`, `post_comments_count`, `post_status`) 
+                           `post_content`, `post_date`, `post_tags`, `post_status`) 
               VALUES ({$post_category_id},'{$post_title}','{$post_author}','{$post_image}','{$post_content}',
-              '{$post_date}','{$post_tags}','{$post_comment_count}','{$post_status}')";
+              '{$post_date}','{$post_tags}','{$post_status}')";
         $create_post_query = mysqli_query($connect, $query);
         confirm($create_post_query);
     } ?>
