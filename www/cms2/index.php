@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 
                 <!-- First Blog Post -->
                 <?php
-                $query = "SELECT * FROM posts ";
+                $query = "SELECT * FROM posts WHERE post_status ='published'";
                 $slect_all_posts_query = mysqli_query($connect, $query);
 
                 while ($row = mysqli_fetch_assoc($slect_all_posts_query)){
@@ -31,7 +31,11 @@ error_reporting(E_ALL);
                     $post_image = $row['post_image'];
                     $post_content =  substr($row['post_content'],0, 150);
                     $post_date = $row['post_date'];
+                    $post_status = $row['post_status'];
 
+                    if (count($row)===0){
+                        echo "<h1>No Post Sorry</h1>";
+                    }else{
 
                     ?>
                     <h2>
@@ -47,7 +51,7 @@ error_reporting(E_ALL);
                     <p><?php  echo $post_content; ?></p>
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                 <?php   }
-
+                    }
                 ?>
 
 

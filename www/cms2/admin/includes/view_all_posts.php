@@ -9,6 +9,7 @@
         <td>Image</td>
         <td>Tags</td>
         <td>Comments</td>
+        <td>Status</td>
         <td>Date</td>
         <td>Edit</td>
         <td>Delete</td>
@@ -52,6 +53,7 @@
         echo "<td><img src='../images/{$post_image}' width='100' alt='{$post_image}'/></td>";
         echo "<td>{$post_tags}</td>";
         echo "<td>{$post_comments_count}</td>";
+        echo "<td>{$post_status}</td>";
         echo "<td>{$post_date}</td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
         echo "<td><a href='posts.php?delete=$post_id'>Delete</a></td>";
