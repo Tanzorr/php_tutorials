@@ -88,7 +88,12 @@ error_reporting(E_ALL);
                 }
 
 
-                $query ="UPDATE posts SET post_comment_count = post_comment_count+1";
+                $query ="UPDATE posts SET post_comments_count = post_comments_count+1 
+                 WHERE post_id =  $the_post_id";
+                $update_comments_count = mysqli_query($connect,$query);
+                if(!$update_comments_count){
+                    die('QUERY FAILED'.mysqli_error($connect));
+                }
 
             }
 
@@ -154,7 +159,7 @@ error_reporting(E_ALL);
                 $comment_date = $row['comment_date'];?>
 
 
-          <?php  }
+          <?php  //}
             ?>
             <div class="media">
                 <a class="pull-left" href="#">
@@ -167,6 +172,7 @@ error_reporting(E_ALL);
                     <?php echo $comment_content ?>
                 </div>
             </div>
+            <?php } ?>
                 </div>
 
         <!-- Blog Sidebar Widgets Column -->
