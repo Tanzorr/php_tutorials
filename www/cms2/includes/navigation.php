@@ -27,9 +27,13 @@
                 }
 
             ?>
-
                 <li>
-                    <a href="admin">Admin</a>
+                    <?php  if($_SESSION['user_role'] ==='admin'){
+                        echo "<a href='admin'>Admin</a>";
+                    }else{
+                       echo "";
+                    } ?>
+
                 </li>
 <!--                <li>-->
 <!--                    <a href="#">Services</a>-->

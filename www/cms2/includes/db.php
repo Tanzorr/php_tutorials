@@ -1,9 +1,6 @@
 <?php
 
-//
-//$DBuser = 'root';
-//$DBpass = 'tiger';
-//$pdo = null;
+
 
 define('DB_USER','root');
 define('DB_PASS','tiger');
@@ -13,7 +10,7 @@ define('DB_BASE','docker');
 $connect = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_BASE);
 
 if($connect){
-    echo "Connect Success";
+  //  echo "Connect Success";
 }
 
 
