@@ -28,7 +28,7 @@
 
             ?>
                 <li>
-                    <?php  if($_SESSION['user_role'] ==='admin'){
+                    <?php  if(isset($_SESSION['user_role']) && $_SESSION['user_role'] ==='admin'){
                         echo "<a href='admin'>Admin</a>";
                     }else{
                        echo "";
