@@ -1,6 +1,43 @@
 <?php  include "includes/db.php"; ?>
  <?php  include "includes/header.php"; ?>
 
+<?php
+    if (isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $username = mysqli_real_escape_string($connect,$username);
+        $email =  mysqli_real_escape_string($connect,$email);
+        $password =  mysqli_real_escape_string($connect,$password);
+
+        if (!empty($username) && !empty($email) && !empty($password)){
+            $query = "SELECT randSalt FROM users";
+            $select_randsalt_query = mysqli_query($connect,$query);
+            if(!$select_randsalt_query){
+                die("Query Failead".mysqli_error($connect));
+            }
+
+            $row = mysqli_fetch_array($select_randsalt_query);
+
+            $salt = $row['randSalt'];
+
+            $query = "INSERT INTO `users`( `user_name`, `user_password`, `user_email`, `user_role`) 
+                      VALUES ('{$username}','{$password}','{$email}','subscriber')";
+            $register_user_query = mysqli_query($connect,$query);
+            if (!$register_user_query){
+                die("Query Failead".mysqli_error($connect));
+            }
+            $messange = "Yur registration has been submited";
+
+        }else{
+            $messange= "The filds can't bee empty";
+        }
+    }else{
+        $messange ="";
+    }
+?>
+
 
     <!-- Navigation -->
     
@@ -16,6 +53,7 @@
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="form-wrap">
                 <h1>Register</h1>
+                    <h6><?php echo $messange; ?></h6>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>

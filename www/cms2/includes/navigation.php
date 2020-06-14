@@ -29,7 +29,7 @@
             ?>
 
                     <?php  if(isset($_SESSION['user_role']) && $_SESSION['user_role'] ==='admin'){
-                        echo "     <li><a href='admin'>Admin</a></li>";
+                        echo "<li><a href='admin'>Admin</a></li>";
 
                         if (isset($_GET['p_id'])){
                             $the_post_id = $_GET['p_id'];
@@ -38,6 +38,7 @@
                     }else{
                        echo "";
                     } ?>
+                     <li><a href='registration.php'>Registration</a></li>
 
 
 <!--                <li>-->
