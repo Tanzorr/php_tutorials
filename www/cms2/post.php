@@ -1,8 +1,10 @@
 <?php  include "./includes/db.php";
+session_start();
 error_reporting(E_ALL);
 ?>
 
 <?php  include "./includes/header.php"?>
+
 
     <!-- Navigation -->
 <?php include "./includes/navigation.php"?>
@@ -21,6 +23,7 @@ error_reporting(E_ALL);
 
                 <!-- First Blog Post -->
                 <?php
+
                 if (isset($_GET['p_id'])){
                     echo $the_post_id = $_GET['p_id'];
                 }
@@ -50,7 +53,7 @@ error_reporting(E_ALL);
                     <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
                     <hr>
                     <p><?php  echo $post_content; ?></p>
-                    <a class="btn btn-primary mb-5" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+
                 <?php   }
 
                 ?>
@@ -61,39 +64,34 @@ error_reporting(E_ALL);
             <?php
             if(isset($_POST['create_comment'])){
                     $the_post_id = $_GET['p_id'];
-
                     $comment_author = $_POST['comment_author'];
                     $comment_email = $_POST['comment_email'];
                     $comment_content = $_POST['comment_content'];
 
-                    $query = "INSERT INTO `comments`( 
-                                                     `comment_post_id`,
-                                                    `comment_author`, 
-                                                    `comment_email`, 
-                                                    `comment_content`,
-                                                     `comment_date`, 
-                                                     `comment_status`) 
-                                                      VALUES (
-                                                      $the_post_id,
-                                                      '{$comment_author}'
-                                                      ,'{$comment_email}'
-                                                      ,'{$comment_content}'
-                                                      ,now()
-                                                      ,'unapproved'
-                                                      )";
-                    $create_comments = mysqli_query($connect,$query);
+                    if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)){
+                        $query = "INSERT INTO `comments`( `comment_post_id`, `comment_author`, `comment_email`, 
+                                                     `comment_content`, `comment_date`, `comment_status`)
+                               VALUES ( {$the_post_id}, '{$comment_author}' ,'{$comment_email}' ,'{$comment_content}'
+                                            ,now(),'approved' )";
+                                    $create_comments = mysqli_query($connect,$query);
 
-                if(!$create_comments){
-                    die('QUERY FAILED'.mysqli_error($connect));
-                }
+                                    if(!$create_comments){
+                                        die('QUERY FAILED'.mysqli_error($connect));
+                                    }
 
 
-                $query ="UPDATE posts SET post_comments_count = post_comments_count+1 
-                 WHERE post_id =  $the_post_id";
-                $update_comments_count = mysqli_query($connect,$query);
-                if(!$update_comments_count){
-                    die('QUERY FAILED'.mysqli_error($connect));
-                }
+                                    $query ="UPDATE posts SET post_comments_count = post_comments_count+1 
+                             WHERE post_id =  $the_post_id";
+                                    $update_comments_count = mysqli_query($connect,$query);
+                                    if(!$update_comments_count){
+                                        die('QUERY FAILED'.mysqli_error($connect));
+                                    }
+
+                                }else{
+                        echo "<script>alert('Fields cnanot be empty')</script>";
+                    }
+
+
 
             }
 

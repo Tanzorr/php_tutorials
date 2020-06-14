@@ -63,6 +63,8 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
     $update_post = mysqli_query($connect, $query);
 
     confirm($update_post);
+
+    echo "<p class='bg-success'>Post updated<a href='../post.php?p_id={$the_post_id}'> View  post</a> or <a href='posts.php'>Edit More Posts</a></p>";
 }
 ?>
 
@@ -144,10 +146,22 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 
 
     <div class="form-group">
+        <div>
+            <label for="Post Status">Post Status</label>
+        </div>
+
         <select name="post_status" id="">
-            <option value="draft">Post Status</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
+            <option value="<?php echo $post_status;?>"><?php echo $post_status;?></option>
+            <?php
+                if ($post_status =='published'){
+                    echo "  <option value='draft'>Draft</option>";
+                }else{
+                    echo "<option value='published'>Published</option>";
+                }
+
+            ?>
+
+
         </select>
     </div>
 

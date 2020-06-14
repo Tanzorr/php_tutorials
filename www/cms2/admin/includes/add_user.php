@@ -22,6 +22,16 @@
               'image','{$user_role}')";
         $create_user = mysqli_query($connect, $query);
         confirm($create_user);
+        header("Location: users.php");
+
+//        if(isset($create_user)){
+//            ?>
+<!--            <p>User Created <a herf='users.php' style='cursor: pointer'>View Users</a></p>-->
+<!--        --><?php
+//        }
+
+
+
     } ?>
 
 <form action="" method="post" enctype="multipart/form-data">

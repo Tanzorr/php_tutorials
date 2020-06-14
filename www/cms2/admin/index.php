@@ -140,6 +140,10 @@ if($_SESSION['user_role']!=='admin'){
                 </div>
                 <!-- End widjet row-->
                 <?php
+                        $query = "SELECT * FROM posts ";
+                        $select_all_post = mysqli_query($connect,$query);
+                        $post_counts = mysqli_num_rows($select_all_post);
+
                         $query = "SELECT * FROM posts WHERE post_status='draft'";
                         $select_all_darft_post = mysqli_query($connect,$query);
                         $post_draft_counts = mysqli_num_rows($select_all_darft_post);
@@ -164,15 +168,15 @@ if($_SESSION['user_role']!=='admin'){
                             var data = google.visualization.arrayToDataTable([
                                 ['Date', 'Count'],
                                 <?php
-                                    $element_text = ['Active Posts','Draft Posts','Comments',
+                                    $element_text = ["All posts",'Active Posts','Draft Posts','Comments',
                                         'Panding Comments','Users','Subscribers'
                                         ,'Categories'];
-                                    $element_count = [$post_counts,$post_draft_counts, $comments_counts,
+                                    $element_count = [$post_counts,$post_counts,$post_draft_counts, $comments_counts,
                                         $comments_unapproved_counts,
                                         $users_counts,
                                         $users_subscriber_count,
                                         $categories_counts];
-                                    for ($i =0; $i < 7; ++$i){
+                                    for ($i =0; $i < 8; ++$i){
                                         echo "['{$element_text[$i]}'".","."'{$element_count[$i]}'],";
                                     }
                                 ?>

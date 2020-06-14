@@ -22,6 +22,8 @@
               '{$post_date}','{$post_tags}','{$post_status}')";
         $create_post_query = mysqli_query($connect, $query);
         confirm($create_post_query);
+        $the_post_id = mysqli_insert_id($connect);
+        echo "<p class='bg-success'>Post Created<a href='../post.php?p_id={$the_post_id}'> View  post</a> or <a href='posts.php'>Edit More Posts</a></p>";
     } ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -118,7 +120,9 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control "name="post_content" id="body" cols="30" rows="10">
+
+
+        <textarea class="form-control " name="post_content" id="body" cols="30" rows="10">
          </textarea>
     </div>
 
