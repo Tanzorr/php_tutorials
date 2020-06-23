@@ -25,15 +25,18 @@ error_reporting(E_ALL);
                 <?php
 
                 if (isset($_GET['p_id'])){
-                    echo $the_post_id = $_GET['p_id'];
-                }
-
+                    $the_post_id = $_GET['p_id'];
+                    $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id ='{$the_post_id}'";
+                    $send_query = mysqli_query($connect,$view_query);
+                    if(!$send_query){
+                        die("query faled".mysqli_error($connect));
+                    }
 
 
                 $query = "SELECT * FROM posts WHERE post_id ={$the_post_id}";
-                $slect_all_posts_query = mysqli_query($connect, $query);
+                $select_posts_query = mysqli_query($connect, $query);
 
-                while ($row = mysqli_fetch_assoc($slect_all_posts_query)){
+                while ($row = mysqli_fetch_assoc($select_posts_query)){
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
                     $post_image = $row['post_image'];
@@ -55,6 +58,10 @@ error_reporting(E_ALL);
                     <p><?php  echo $post_content; ?></p>
 
                 <?php   }
+                }else{
+                    header("Location: index.php");
+                }
+
 
                 ?>
             </div>
@@ -94,6 +101,7 @@ error_reporting(E_ALL);
 
 
             }
+
 
             ?>
 

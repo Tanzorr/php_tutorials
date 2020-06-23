@@ -2,8 +2,10 @@
 if($_SESSION['user_role']!=='admin'){
     header('Location:../index.php');
 }
+//include "functions.php";
 ?>
 <?php include"./includes/admin_header.php";?>
+<?php users_online();?>
 
     <div id="wrapper">
         <!-- Navigation -->
@@ -20,6 +22,7 @@ if($_SESSION['user_role']!=='admin'){
                             Admin Panel
                             <small><?php  echo  $_SESSION['username'];?></small>
                         </h1>
+
 
                     </div>
                 </div>

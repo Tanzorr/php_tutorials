@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     $('#selectAllboxes').click(function (event) {
         if (this.checked){
             console.log("allCheckbox", this.checked)
@@ -12,4 +13,16 @@ $(document).ready(function () {
             })
         }
     })
+
 })
+
+let dib_box = "<div id='load-screen'><div id='loading'></div></div>";
+$("body").prepend(dib_box);
+$('#load-screen').delay(700).fadeOut(600, function () {
+    $(this).remove();
+})
+
+
+
+
+
