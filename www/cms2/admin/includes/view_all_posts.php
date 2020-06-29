@@ -83,7 +83,7 @@
     <tr>
         <td><input id="selectAllboxes" type="checkbox"></td>
         <td>id</td>
-        <td>Author</td>
+        <td>Users</td>
         <td>Title</td>
         <td>Category</td>
         <td>Status</td>
@@ -108,6 +108,10 @@
     while ($row = mysqli_fetch_assoc($select_posts)) {
         $post_id = $row['post_id'];
         $post_author = $row['post_author'];
+        $post_user = $row['post_user'];
+        if(!$post_author){
+            $post_author =$post_user;
+        }
         $post_title = $row['post_title'];
         $post_category_id = $row['post_category_id'];
         $post_status = $row['post_status'];

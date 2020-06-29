@@ -53,7 +53,11 @@ error_reporting(E_ALL);
             while ($row = mysqli_fetch_assoc($slect_all_posts_query)){
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
+                $post_user = $row['post_user'];
                 $post_author = $row['post_author'];
+                if(!isset($post_author) || empty($post_author)){
+                    $post_author = $post_user;
+                }
                 $post_image = $row['post_image'];
                 $post_content =  substr($row['post_content'],0, 150);
                 $post_date = $row['post_date'];

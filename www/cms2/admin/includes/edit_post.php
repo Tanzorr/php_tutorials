@@ -109,25 +109,25 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
         <label for="users">Users</label>
         <select name="post_user" id="">
 
-            <!--            --><?php
-            //
-            //            $users_query = "SELECT * FROM users";
-            //            $select_users = mysqli_query($connection,$users_query);
-            //
-            //            confirmQuery($select_users);
-            //
-            //
-            //            while($row = mysqli_fetch_assoc($select_users)) {
-            //                $user_id = $row['user_id'];
-            //                $username = $row['username'];
-            //
-            //
-            //                echo "<option value='{$username}'>{$username}</option>";
-            //
-            //
-            //            }
-            //
-            //            ?>
+                        <?php
+
+                        $users_query = "SELECT * FROM users";
+                        $select_users = mysqli_query($connect,$users_query);
+
+                        confirm($select_users);
+
+
+                        while($row = mysqli_fetch_assoc($select_users)) {
+                            $user_id = $row['user_id'];
+                            $username = $row['user_name'];
+
+
+                            echo "<option value='{$username}'>{$username}</option>";
+
+
+                        }
+
+                        ?>
 
 
         </select>
