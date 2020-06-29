@@ -26,22 +26,41 @@ if(isset($_POST['update_user'])){
     $user_email = $_POST['user_email'];
     $user_password =$_POST['user_password'];
 
+    if (!empty($user_password)){
+        $query_password = "SELECT user_password FROM users WHERE user_id = $the_user_id";
+        $get_user_query = mysqli_query($connect,$query);
+        confirm($get_user_query);
 
-  //  move_uploaded_file($post_image_temp,"../images/$post_image");
-    $query = "UPDATE `users` SET 
+        $row = mysqli_fetch_array($get_user_query);
+
+        $db_user_password = $row['user_password'];
+
+        if($db_user_password != $user_password){
+            $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('const'=>12));
+        }
+
+        $query = "UPDATE `users` SET 
                         `user_name`='{$user_name}',
-                        `user_password`='{$user_password}',
+                        `user_password`='{$hashed_password}',
                         `user_first_name`='{$user_first_name}',
                         `user_last_name`='{$user_last_name}',
                         `user_email`='{$user_email}',
                         `user_image`='imageU',
                          `user_role`='{$user_role}'
                            WHERE user_id = $the_user_id";
+        $update_user = mysqli_query($connect, $query);
+        confirm($update_user);
+
+    }else{
+
+    }
+
+
+    header("Location:index.php");
+
+
 }
 
-$update_user = mysqli_query($connect, $query);
-
-confirm($update_user);
 
  ?>
 
@@ -88,7 +107,7 @@ confirm($update_user);
 
     <div class="form-group">
         <label for="post_content">Password</label>
-        <input type="text"  class="form-control"  value="<?php echo $user_password; ?>"   name="user_password">
+        <input type="text" autocomplete="off"  class="form-control"    name="user_password">
     </div>
 
 

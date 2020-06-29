@@ -106,7 +106,7 @@ confirm($update_user);
 
                             <div class="form-group">
                                 <label for="post_content">Password</label>
-                                <input type="text"  class="form-control"  value="<?php echo $user_password; ?>"   name="user_password">
+                                <input autocomplete="off" type="password"  class="form-control"  name="user_password">
                             </div>
 
 

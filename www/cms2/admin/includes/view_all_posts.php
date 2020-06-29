@@ -139,7 +139,15 @@
         echo "<td>{$post_status}</td>";
         echo "<td><img src='../images/{$post_image}' width='100' alt='{$post_image}'/></td>";
         echo "<td>{$post_tags}</td>";
-        echo "<td>{$post_comments_count}</td>";
+
+        $query = "SELECT * FROM comments WHERE comment_post_id =$post_id";
+        $comment_count_query =mysqli_query($connect,$query);
+        $row = mysqli_fetch_array($comment_count_query);
+        $comment_id = $row['comment_id'];
+        $count_comment = mysqli_num_rows($comment_count_query);
+
+
+        echo "<td><a href='post_comments.php?id=$post_id'>{$count_comment}</a></td>";
         echo "<td>{$post_status}</td>";
         echo "<td><a href='posts.php?reset=$post_id'>{$post_view_count}</a></td>";
         echo "<td>{$post_date}</td>";

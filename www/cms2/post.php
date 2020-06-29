@@ -86,13 +86,13 @@ error_reporting(E_ALL);
                                         die('QUERY FAILED'.mysqli_error($connect));
                                     }
 
-
-                                    $query ="UPDATE posts SET post_comments_count = post_comments_count+1 
-                             WHERE post_id =  $the_post_id";
-                                    $update_comments_count = mysqli_query($connect,$query);
-                                    if(!$update_comments_count){
-                                        die('QUERY FAILED'.mysqli_error($connect));
-                                    }
+//
+//                                    $query ="UPDATE posts SET post_comments_count = post_comments_count+1
+//                             WHERE post_id =  $the_post_id";
+//                                    $update_comments_count = mysqli_query($connect,$query);
+//                                    if(!$update_comments_count){
+//                                        die('QUERY FAILED'.mysqli_error($connect));
+//                                    }
 
                                 }else{
                         echo "<script>alert('Fields cnanot be empty')</script>";
