@@ -55,6 +55,7 @@
     }
 
 ?>
+<?php include("delite_modal.php");?>
 <form action="" method="post">
     <table class="table table-bordered table-hover">
 
@@ -149,15 +150,14 @@
         $row = mysqli_fetch_array($comment_count_query);
         $comment_id = $row['comment_id'];
         $count_comment = mysqli_num_rows($comment_count_query);
-
-
         echo "<td><a href='post_comments.php?id=$post_id'>{$count_comment}</a></td>";
         echo "<td>{$post_status}</td>";
         echo "<td><a href='posts.php?reset=$post_id'>{$post_view_count}</a></td>";
         echo "<td>{$post_date}</td>";
         echo "<td><a href='../post.php?p_id={$post_id}'>View</a></td>";
         echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
-        echo "<td><a onclick=\" javascript: return confirm('Are you shoure you whan to delete')\" href='posts.php?delete=$post_id'>Delete</a></td>";
+        echo "<td><a  class='delete_link' rel='{$post_id}' href='javascript:void(0)'>Delete</a></td>";
+       // echo "<td><a onclick=\" javascript: return confirm('Are you shoure you whan to delete')\" href='posts.php?delete=$post_id'>Delete</a></td>";
         echo "</tr>";
 
     }
@@ -183,3 +183,14 @@ if (isset($_GET['reset'])){
 
 
 ?>
+
+<script>
+    $(document).ready(function () {
+       $(".delete_link").on("click", function () {
+           let id = $(this).attr("rel")
+          let  delete_url = `posts.php?delete=${id}`;
+           $(".modal_delete_link").attr("href",delete_url);
+           $("#myModal").modal('show')
+       })
+    })
+</script

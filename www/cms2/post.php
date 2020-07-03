@@ -32,11 +32,20 @@ error_reporting(E_ALL);
                         die("query faled".mysqli_error($connect));
                     }
 
+                 if(isset($_SESSION['user_role']) && $_SESSION['user_role']==="admin") {
+                      $query = "SELECT * FROM posts WHERE post_id ={$the_post_id}";
+                 }else {
+                  $query = "SELECT * FROM posts WHERE post_id ={$the_post_id} AND post_status ='published'";
+                 }
 
-                $query = "SELECT * FROM posts WHERE post_id ={$the_post_id}";
                 $select_posts_query = mysqli_query($connect, $query);
 
+                 if(mysqli_num_rows($select_posts_query)<1){
+                     echo "<h1>No Post avalable</h1>";
+                 }else{
                 while ($row = mysqli_fetch_assoc($select_posts_query)){
+
+
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
                     $post_image = $row['post_image'];
@@ -57,7 +66,7 @@ error_reporting(E_ALL);
                     <hr>
                     <p><?php  echo $post_content; ?></p>
 
-                <?php   }
+                <?php   }}
                 }else{
                     header("Location: index.php");
                 }
@@ -68,6 +77,7 @@ error_reporting(E_ALL);
 
             <hr>
             <!-- Comments Form -->
+            <?php  if(mysqli_num_rows($select_posts_query)===1){ ?>
             <?php
             if(isset($_POST['create_comment'])){
                     $the_post_id = $_GET['p_id'];
@@ -178,8 +188,12 @@ error_reporting(E_ALL);
                     <?php echo $comment_content ?>
                 </div>
             </div>
-            <?php } ?>
+            <?php }
+
+            }?>
                 </div>
+
+
 
         <!-- Blog Sidebar Widgets Column -->
         <?php include "./includes/sidebar.php"?>

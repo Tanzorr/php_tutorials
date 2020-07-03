@@ -4,9 +4,6 @@ error_reporting(E_ALL);
 ?>
 
 <?php  include "./includes/header.php"?>
-
-
-
     <!-- Navigation -->
 <?php include "./includes/navigation.php"?>
     <!-- Page Content -->
@@ -18,8 +15,7 @@ error_reporting(E_ALL);
         <div class="col-md-8">
 
             <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
+
             </h1>
 
             <!-- First Blog Post -->
@@ -40,14 +36,24 @@ error_reporting(E_ALL);
                 $page_1 = ($page * $per_page)-$per_page;
             }
 
+            $post_query_count = "SELECT * FROM posts WHERE post_status='published'";
+            if( isset($_SESSION['user_role'])==="admin"){
+                $post_query_count = "SELECT * FROM posts";
+            }
 
-
-            $post_query_count = "SELECT * FROM posts";
             $find_count =mysqli_query($connect,$post_query_count);
             $count = mysqli_num_rows($find_count);
+            if($count=== 0 ){
+                echo "<h1 class='text-center'>No publidhrd post post here</h1>";
+            }
             $count =ceil($count/$per_page);
 
-            $query = "SELECT * FROM posts LIMIT $page_1 ,  $per_page";
+             if(isset($_SESSION['user_role']) && $_SESSION['user_role']==="admin") {
+
+                 $query = "SELECT * FROM posts LIMIT $page_1 ,  $per_page";
+             }else{
+                 $query = "SELECT * FROM posts WHERE post_status='published' LIMIT $page_1 ,  $per_page";
+             }
             $slect_all_posts_query = mysqli_query($connect, $query);
 
             while ($row = mysqli_fetch_assoc($slect_all_posts_query)){
@@ -63,13 +69,8 @@ error_reporting(E_ALL);
                 $post_date = $row['post_date'];
                 $post_status = $row['post_status'];
 
-                if (count($row)===0){
-                    echo "<h1>No Post Sorry</h1>";
-                }else{
 
-                    ?>
-                    <h2>
-
+                ?>                    <h2>
                         <a href="post.php?p_id=<?php echo $post_id;?>"><?php  echo $post_title; ?></a>
                     </h2>
                     <p class="lead">
@@ -84,7 +85,9 @@ error_reporting(E_ALL);
                     <hr>
                     <p><?php  echo $post_content; ?></p>
                     <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id;?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                <?php   }
+                <?php
+
+
             }
             ?>
 

@@ -1,7 +1,7 @@
 <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Open modal
-</button>
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">-->
+<!--    Open modal-->
+<!--</button>-->
 
 <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -10,18 +10,19 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
+                <h4 class="modal-title">Modal Delete Box</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                Modal body..
+                Are you sure You Want to delete ?
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <a href="" class="btn btn-danger modal_delete_link">Delete</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cansel</button>
             </div>
 
         </div>

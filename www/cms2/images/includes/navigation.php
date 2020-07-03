@@ -15,31 +15,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
             <?php
-                $query = "SELECT * FROM categories LIMIT 3 ";
-                $select_all_categories_query = mysqli_query($connect, $query);
+                $query = "SELECT * FROM categories ";
+                $slect_all_categories_query = mysqli_query($connect, $query);
 
-                while ($row = mysqli_fetch_assoc($select_all_categories_query)){
+                while ($row = mysqli_fetch_assoc($slect_all_categories_query)){
                     $cat_title = $row['cat_name'];
                     $cat_id = $row['cat_id'];
 
-                    $category_class='';
-                    $registration_class='';
-                    $contact_class='';
-                    $pageName = basename($_SERVER['PHP_SELF']);
-                    $registration = 'registration.php';
-                    $contact = 'contact.php';
-
-                    if(isset($_GET['category']) && $_GET['category']===$cat_id){
-
-                        $category_class ='active';
-                    }elseif ($pageName ==$registration){
-                        $registration_class ="active";
-                    }elseif ($pageName ==$contact){
-                        $contact_class = "active";
-                    }
-
-
-                    echo "<li class='$category_class'><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                    echo "<li><a href='category.php?category=$cat_id' style='color:#fff'>{$cat_title}</a></li>";
 
                 }
 
@@ -55,8 +38,8 @@
                     }else{
                        echo "";
                     } ?>
-                     <li class="<?php echo $registration_class ?>"><a href='registration.php'>Registration</a></li>
-                     <li class="<?php echo $contact_class ?>"><a href='contact.php'>Contact</a></li>
+                     <li><a href='registration.php'>Registration</a></li>
+                     <li><a href='contact.php'>Contact</a></li>
 
 
 <!--                <li>-->
