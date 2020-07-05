@@ -39,9 +39,8 @@ if($_SESSION['user_role']!=='admin'){
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <?php
-                                            $query = "SELECT * FROM posts";
-                                            $select_all_post = mysqli_query($connect,$query);
-                                            $post_counts = mysqli_num_rows($select_all_post);
+                                          ;
+                                            $post_counts = recordCount("posts");
                                              echo "<div class='huge'>{$post_counts}</div>"
                                         ?>
 
@@ -68,9 +67,8 @@ if($_SESSION['user_role']!=='admin'){
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <?php
-                                        $query = "SELECT * FROM comments";
-                                        $select_all_comments = mysqli_query($connect,$query);
-                                        $comments_counts = mysqli_num_rows($select_all_post);
+
+                                        $comments_counts =recordCount('comments');
                                         echo "<div class='huge'>{$comments_counts}</div>"
                                         ?>
                                         <div>Comments</div>
@@ -95,9 +93,8 @@ if($_SESSION['user_role']!=='admin'){
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <?php
-                                        $query = "SELECT * FROM users";
-                                        $select_all_users = mysqli_query($connect,$query);
-                                        $users_counts = mysqli_num_rows($select_all_users);
+
+                                        $users_counts = recordCount("users");
                                         echo "<div class='huge'>{$users_counts}</div>"
                                         ?>
                                         <div> Users</div>
@@ -122,9 +119,7 @@ if($_SESSION['user_role']!=='admin'){
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <?php
-                                        $query = "SELECT * FROM categories";
-                                        $select_all_categories = mysqli_query($connect,$query);
-                                        $categories_counts = mysqli_num_rows($select_all_categories);
+                                        $categories_counts = recordCount('categories');
                                         echo "<div class='huge'>{$categories_counts}</div>"
                                         ?>
                                         <div>Categories</div>
@@ -147,17 +142,16 @@ if($_SESSION['user_role']!=='admin'){
                         $select_all_post = mysqli_query($connect,$query);
                         $post_counts = mysqli_num_rows($select_all_post);
 
-                        $query = "SELECT * FROM posts WHERE post_status='draft'";
-                        $select_all_darft_post = mysqli_query($connect,$query);
-                        $post_draft_counts = mysqli_num_rows($select_all_darft_post);
 
-                        $query = "SELECT * FROM comments WHERE comment_status= 'unapproved'";
-                        $select_all_unapproved_comments = mysqli_query($connect,$query);
-                        $comments_unapproved_counts = mysqli_num_rows($select_all_unapproved_comments);
 
-                        $query = "SELECT * FROM users WHERE user_role='subscriber'";
-                        $select_all_subscriber_users = mysqli_query($connect,$query);
-                        $users_subscriber_count = mysqli_num_rows($select_all_subscriber_users);
+                        $post_draft_counts = checkStatus("posts",'post_status','draft');
+
+
+                        $comments_unapproved_counts = checkStatus("comments",'comment_status','approved');
+
+
+
+                        $users_subscriber_count = checkStatus("users",'user_role','admin');
 
 
                 ?>
