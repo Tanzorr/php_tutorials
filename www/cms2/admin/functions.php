@@ -4,19 +4,15 @@ function escape($string){
     global $connect;
     return mysqli_real_escape_string($connect, trim($string));
 }
-
 function confirm($result){
     global  $connect;
     if(!$result){
         die('QUERY FAILED'.mysqli_error($connect));
     }
-
 }
-
-
-
-
-
+function redirect($location){
+    return header("Location:".$location);
+}
 
 function users_online(){
     if (isset($_GET['onlineusers'])){
@@ -115,7 +111,7 @@ function checkStatus($table, $column, $status){
 
 function is_admin($username = ''){
     global $connect;
-    $query = "SELECT user_role FROM users WHERE username = '$username'";
+    $query = "SELECT user_role FROM users WHERE user_name = '$username'";
     $result = mysqli_query($connect, $query);
     confirm($result);
     $row  = mysqli_fetch_array($result);
@@ -125,3 +121,63 @@ function is_admin($username = ''){
         return false;
     }
 }
+
+function is_exist($value,$philds, $table){
+    global  $connect;
+    $query = "SELECT $philds FROM $table WHERE user_name = '$value'";
+    $result = mysqli_query($connect, $query);
+    confirm($result);
+    $row = mysqli_num_rows($result);
+
+    if ($row>0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function register_user($username, $email, $password){
+    global $connect;
+    if(is_exist($username,"user_name","users")){
+            $message ="User ".$username." exists";
+        }else{
+            $username = mysqli_real_escape_string($connect,$username);
+            $email =  mysqli_real_escape_string($connect,$email);
+            $password =  mysqli_real_escape_string($connect,$password);
+            $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>10));
+                $query = "INSERT INTO `users`( `user_name`, `user_password`, `user_email`, `user_role`) 
+                      VALUES ('{$username}','{$password}','{$email}','subscriber')";
+                $register_user_query = mysqli_query($connect,$query);
+                confirm($register_user_query);
+        }
+}
+
+function login_user($username, $password){
+    global  $connect;
+    $username =trim($username);
+    $password =trim($password);
+    $username = mysqli_real_escape_string($connect, $username);
+    $password = mysqli_real_escape_string($connect, $password);
+    $query = "SELECT * FROM users WHERE user_name = '{$username}' ";
+    $select_user_query = mysqli_query($connect, $query);
+     confirm($select_user_query);
+    while ($row = mysqli_fetch_array($select_user_query)) {
+        $db_user_id = $row['user_id'];
+        $db_user_name = $row['user_name'];
+        $db_user_password = $row['user_password'];
+        $db_user_first_name = $row['user_first_name'];
+        $db_user_last_name = $row['user_last_name'];
+        $db_user_role = $row['user_role'];
+    }
+    if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
+        $_SESSION['username'] = $db_user_name;
+        $_SESSION['firstname'] = $db_user_first_name;
+        $_SESSION['lastname'] = $db_user_last_name;
+        $_SESSION['user_role'] = $db_user_role;
+       // var_dump($_SESSION);
+        redirect("/cms2/admin");
+    } else {
+        redirect("/cms2/index.php");
+    }
+}
+
