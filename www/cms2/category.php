@@ -1,4 +1,5 @@
 <?php  include "./includes/db.php";
+include "./admin/functions.php";
 error_reporting(E_ALL);
 ?>
 
@@ -22,22 +23,41 @@ error_reporting(E_ALL);
             <!-- First Blog Post -->
             <?php
             if (isset($_GET['category'])){
-                    echo $post_category_id = $_GET['category'];
+                    $post_category_id = $_GET['category'];
+
+                    if(isset($_SESSION) && is_admin($_SESSION['username'])){
+                        $stmt1 = mysqli_prepare($connect,"SELECT `post_id`,
+                                    post_title,
+                                    post_author,
+                                    post_image,
+                                    post_content,
+                                    post_date
+                                 FROM posts WHERE post_category_id = ?");
+
+                    }else{
+                        $stmt2 = mysqli_prepare($connect,"SELECT `post_id`,
+                                post_title,
+                                post_author,
+                                post_image,
+                                post_content,
+                                post_date
+                                FROM posts WHERE post_category_id = ? AND post_status = ?");
+                        $published ='published';
+                    }
+            }
+            if(isset($stmt1)){
+                mysqli_stmt_bind_param($stmt1, "i", $post_category_id);
+                mysqli_stmt_execute($stmt1);
+                mysqli_stmt_bind_result($stmt1,$post_id,$post_title,$post_author,$post_date,$post_image,$post_content);
+            $stmt =  $stmt1;
+            }else{
+                mysqli_stmt_bind_param($stmt2, "is" , $post_category_id, $published);
+                mysqli_stmt_execute($stmt2);
+                mysqli_stmt_bind_result($stmt2,$post_id,$post_title,$post_author,$post_image,$post_content,$post_date);
+                $stmt =  $stmt2;
             }
 
-
-
-            $query = "SELECT * FROM posts WHERE post_category_id = {$post_category_id}";
-            $slect_all_posts_query = mysqli_query($connect, $query);
-
-            while ($row = mysqli_fetch_assoc($slect_all_posts_query)){
-                $post_id = $row['post_id'];
-                $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
-                $post_image = $row['post_image'];
-                $post_content =  substr($row['post_content'],0, 150);
-                $post_date = $row['post_date'];
-
+            while (mysqli_stmt_fetch($stmt)){
 
                 ?>
                 <h2>
@@ -53,6 +73,7 @@ error_reporting(E_ALL);
                 <p><?php  echo $post_content; ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
             <?php   }
+            mysqli_stmt_close($stmt);
 
             ?>
 

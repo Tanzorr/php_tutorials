@@ -23,11 +23,14 @@
     if (isset($_POST['update_cat'])){
         $the_cat_title =$_POST['cat_title'];
 
-        $query= "UPDATE  categories SET cat_name='{$the_cat_title}' WHERE cat_id = {$cat_id}";
-        $update_query = mysqli_query($connect,$query );
-        if(!$update_query){
+        $stmt= mysqli_prepare($connect,"UPDATE  categories SET cat_name=? WHERE cat_id = ?");
+        mysqli_stmt_bind_param($stmt,'si',$the_cat_title, $cat_id);
+        mysqli_stmt_execute($stmt);
+        if(!$stmt){
             die("Query Failead".mysqli_error($connect));
         }
+        mysqli_stmt_close($stmt);
+        redirect('./categories.php');
     }
     ?>
 

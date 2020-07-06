@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">CMS Blog</a>
+            <a class="navbar-brand" href="/cms2">CMS Blog</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,34 +39,24 @@
                     }
 
 
-                    echo "<li class='$category_class'><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                    echo "<li class='$category_class'><a href='/cms2/category/$cat_id'>{$cat_title}</a></li>";
 
                 }
 
             ?>
 
                     <?php  if(isset($_SESSION['user_role']) && $_SESSION['user_role'] ==='admin'){
-                        echo "<li><a href='admin'>Admin</a></li>";
+                        echo "<li><a href='/cms2/admin'>Admin</a></li>";
 
                         if (isset($_GET['p_id'])){
                             $the_post_id = $_GET['p_id'];
-                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
+                            echo "<li><a href='/cms2/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                         }
                     }else{
                        echo "";
                     } ?>
-                     <li class="<?php echo $registration_class ?>"><a href='registration.php'>Registration</a></li>
-                     <li class="<?php echo $contact_class ?>"><a href='contact.php'>Contact</a></li>
-
-
-<!--                <li>-->
-<!--                    <a href="#">Services</a>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <a href="#">Contact</a>-->
-<!--                </li>-->
-
-
+                     <li class="<?php echo $registration_class ?>"><a href='/cms2/registration'>Registration</a></li>
+                     <li class="<?php echo $contact_class ?>"><a href='/cms2/contact'>Contact</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
