@@ -19,10 +19,10 @@
     <div class="well">
         <?php if (isset($_SESSION['user_role'])){ ?>
             <h4>Loged in as <?php echo $_SESSION['username'] ?></h4>
-            <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+            <a href="/cms2/includes/logout.php" class="btn btn-primary">Logout</a>
         <?php }else{?>
         <h4>Login</h4>
-        <form action="includes/login.php" method="post">
+        <form action="/cms2/login.php" method="post">
             <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Enter Username"/>
             </div>
@@ -53,11 +53,9 @@
                     while ($row = mysqli_fetch_assoc($slect_all_categories_sidebar)){
                         $cat_id = $row['cat_id'];
                         $cat_title = $row['cat_name'];
-                        echo "<li><a href='category.php?category=$cat_id''>{$cat_title}</a></li>";
+                        echo "<li><a href='/cms2/category/$cat_id''>{$cat_title}</a></li>";
                     }
                     ?>
-
-
                 </ul>
             </div>
             <!-- /.col-lg-6 -->

@@ -11,8 +11,30 @@ function confirm($result){
     }
 }
 function redirect($location){
-    return header("Location:".$location);
+    header("Location:".$location);
+    exit;
 }
+
+function ifItIsMethod($method=null){
+    if($_SERVER['REQUEST_METHOD']===strtoupper($method)){
+        return true;
+    }
+    return  false;
+}
+
+function isLoggedIn(){
+    if(isset($_SESSION['user_role'])){
+        return true;
+    }
+    return  false;
+}
+
+function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
+    if(isLoggedIn()){
+        redirect($redirectLocation);
+    }
+}
+
 
 function users_online(){
     if (isset($_GET['onlineusers'])){
@@ -167,16 +189,18 @@ function login_user($username, $password){
         $db_user_first_name = $row['user_first_name'];
         $db_user_last_name = $row['user_last_name'];
         $db_user_role = $row['user_role'];
+
+        if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
+            $_SESSION['username'] = $db_user_name;
+            $_SESSION['firstname'] = $db_user_first_name;
+            $_SESSION['lastname'] = $db_user_last_name;
+            $_SESSION['user_role'] = $db_user_role;
+            // var_dump($_SESSION);
+            redirect("/cms2/admin");
+        } else {
+            return false;
+        }
     }
-    if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
-        $_SESSION['username'] = $db_user_name;
-        $_SESSION['firstname'] = $db_user_first_name;
-        $_SESSION['lastname'] = $db_user_last_name;
-        $_SESSION['user_role'] = $db_user_role;
-       // var_dump($_SESSION);
-        redirect("/cms2/admin");
-    } else {
-        redirect("/cms2/index.php");
-    }
+    return  true;
 }
 

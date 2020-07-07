@@ -1,5 +1,6 @@
 <?php  include "./includes/db.php";
 include "./admin/functions.php";
+session_start();
 error_reporting(E_ALL);
 ?>
 

@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -17,11 +16,9 @@
             <?php
                 $query = "SELECT * FROM categories LIMIT 3 ";
                 $select_all_categories_query = mysqli_query($connect, $query);
-
                 while ($row = mysqli_fetch_assoc($select_all_categories_query)){
                     $cat_title = $row['cat_name'];
                     $cat_id = $row['cat_id'];
-
                     $category_class='';
                     $registration_class='';
                     $contact_class='';
@@ -53,8 +50,9 @@
                             echo "<li><a href='/cms2/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
                         }
                     }else{
-                       echo "";
+                       echo " <li><a href='/cms2/login.php'>Login</a></li>";
                     } ?>
+
                      <li class="<?php echo $registration_class ?>"><a href='/cms2/registration'>Registration</a></li>
                      <li class="<?php echo $contact_class ?>"><a href='/cms2/contact'>Contact</a></li>
             </ul>

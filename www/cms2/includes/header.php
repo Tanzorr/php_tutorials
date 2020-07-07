@@ -1,6 +1,3 @@
-
-<?php // include_once "../admin/functions.php" ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
