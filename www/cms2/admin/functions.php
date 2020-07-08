@@ -143,9 +143,23 @@ function is_admin($username = ''){
     }
 }
 
+function email_exists($email){
+    global $connect;
+    $query = "SELECT user_email FROM users WHERE user_email = '$email'";
+    $result = mysqli_query($connect, $query);
+    confirmQuery($result);
+    if(mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+
+        return false;
+
+    }
+}
+
 function is_exist($value,$philds, $table){
     global  $connect;
-    $query = "SELECT $philds FROM $table WHERE user_name = '$value'";
+    $query = "SELECT $philds FROM $table WHERE $philds = '{$value}'";
     $result = mysqli_query($connect, $query);
     confirm($result);
     $row = mysqli_num_rows($result);
@@ -156,6 +170,8 @@ function is_exist($value,$philds, $table){
         return false;
     }
 }
+
+
 
 function register_user($username, $email, $password){
     global $connect;

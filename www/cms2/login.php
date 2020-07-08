@@ -11,13 +11,6 @@ if(ifItIsMethod('post')){
     }
 }
 
-//    if(isset($_POST['login'])) {
-//
-//        $username = $_POST['username'];
-//        $password = $_POST['password'];
-//            login_user($username,$password);
-//
-//    }
 ?>
 <!-- Navigation -->
 

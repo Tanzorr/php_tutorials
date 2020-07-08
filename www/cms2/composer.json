@@ -1,0 +1,19 @@
+{
+    "name": "alexx84/cms2",
+    "authors": [
+        {
+            "name": "tanzorr",
+            "email": "alexx1984@ukr.net"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^5.2",
+        "pusher/pusher-php-server": "^3.0",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "autoload": {
+        "classmap": [
+            "classes"
+        ]
+    }
+}
