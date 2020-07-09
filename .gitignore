@@ -3,5 +3,6 @@
 /config/*
 /data/*
 /logs/*
+/www/cms2/vendor
 
 .DS_Store

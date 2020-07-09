@@ -21,12 +21,15 @@ if(ifItIsMethod('post')){
         $lenght = 50;
         $tocken = bin2hex(openssl_random_pseudo_bytes($lenght));
 
+
         if(is_exist($email,'user_email','users')){
+
            if($stmt = mysqli_prepare($connect,"UPDATE users SET token='{$tocken}' WHERE  user_email=?")){
 
                mysqli_stmt_bind_param($stmt,"s", $email);
                mysqli_stmt_execute($stmt);
-               mysqli_stmt_close($stmt);
+
+              // mysqli_stmt_close($stmt);
 
                //Configer phpmailer
                $mail = new PHPMailer();
@@ -48,9 +51,11 @@ if(ifItIsMethod('post')){
                $mail->setFrom('alexx1984@urk.net', 'Edwin Diaz');
                $mail->addAddress($email);
                $mail->Subject ='This is a test email';
-               $mail->Body='<h1>Email Body</h1>';
+               $mail->Body='<p>Pleas klik to reset your password
+                        <a href="localhost/cms2/reset.php?email='.$email.'&token='.$tocken.'">Reset password</a>
+                    </p>';
                if($mail->send()){
-                   echo 'It Was Sent';
+                   $emailSent =true;
                }else{
                    echo 'Not Sent';
                }
@@ -67,6 +72,8 @@ if(ifItIsMethod('post')){
 <!-- Page Content -->
 <div class="container">
 
+        <?php if(!$emailSent){ ?>
+
     <div class="form-gap"></div>
     <div class="container">
         <div class="row">
@@ -80,10 +87,6 @@ if(ifItIsMethod('post')){
                             <h2 class="text-center">Forgot Password?</h2>
                             <p>You can reset your password here.</p>
                             <div class="panel-body">
-
-
-
-
                                 <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 
                                     <div class="form-group">
@@ -107,9 +110,11 @@ if(ifItIsMethod('post')){
             </div>
         </div>
     </div>
-
-
+    <?php }else{ ?>
+        <h2>Please check your email</h2>
+    <?php } ?>
     <hr>
+
 
     <?php include "includes/footer.php";?>
 

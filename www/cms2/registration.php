@@ -25,12 +25,13 @@
             $error['username'] ="User ".$username."already exists pic another one";
         }
 
+
         if($$email===""){
             $error['email']="Email  cant be empty";
         }
 
-        if(is_exist($error, "user_email","users")){
-            $error['email'] ="Email ".$username."already exists <a href='index.php'>Please login</a>";
+        if(is_exist($email, "user_email","users")){
+            $error['email'] ="Email ".$email."already exists <a href='index.php'>Please login</a>";
         }
 
         if($password ==''){

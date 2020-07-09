@@ -186,6 +186,8 @@ function register_user($username, $email, $password){
                       VALUES ('{$username}','{$password}','{$email}','subscriber')";
                 $register_user_query = mysqli_query($connect,$query);
                 confirm($register_user_query);
+                login_user($username, $password);
+
         }
 }
 
@@ -211,7 +213,7 @@ function login_user($username, $password){
             $_SESSION['firstname'] = $db_user_first_name;
             $_SESSION['lastname'] = $db_user_last_name;
             $_SESSION['user_role'] = $db_user_role;
-            // var_dump($_SESSION);
+
             redirect("/cms2/admin");
         } else {
             return false;
