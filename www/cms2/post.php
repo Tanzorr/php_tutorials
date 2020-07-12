@@ -68,10 +68,17 @@ error_reporting(E_ALL);
                     <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
                     <hr>
                     <p><?php  echo $post_content; ?></p>
-                    <?php  echo userLikeThisPost($the_post_id);?>
+                    <?php  if(isLoggedIn()){?>
                     <div class="row text-right"><a href="#" class="<?php echo userLikeThisPost($the_post_id) ? '
-                    unlike':' like' ?>"><span class="glyphicon "></span><?php echo userLikeThisPost($the_post_id) ? 'unlike':' like' ?></a></div>
+                    unlike':' like' ?>"><span class="glyphicon glyphicon-thumbs-up"
+                                                           data-toggle="tooltip"
+                                                            data-palecement="top"
+                                                            title="<?php echo userLikeThisPost($the_post_id) ? 'I liekd this before':' Want to like it ?' ?>"                >
 
+                            </span><?php echo userLikeThisPost($the_post_id) ? 'unlike':' like' ?></a></div>
+                    <?php }else{?>
+                        <p>You need to login to leke <a href="/cms2/login.php">Login</a> </p>
+                        <?php } ?>
                     <div class="row text-right">Likes:<?php getPostLikes($the_post_id);?></div>
                     <div class="clearfix"></div>
                 <?php   }}
@@ -261,6 +268,8 @@ error_reporting(E_ALL);
 
                    //Liked
                     $(".like").click(function () {
+                        //
+                        $("[data-toggle='tooletip']").tooltip();
                      //Liking
                         $.ajax({
                             url:"/cms2/post.php?p_id=<?php echo $the_post_id?>",
