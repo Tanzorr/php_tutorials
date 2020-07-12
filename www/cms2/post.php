@@ -1,4 +1,5 @@
-<?php  include "./includes/db.php";
+<?php include "./admin/functions.php";
+include "./includes/db.php";
 session_start();
 error_reporting(E_ALL);
 ?>
@@ -8,6 +9,8 @@ error_reporting(E_ALL);
 
     <!-- Navigation -->
 <?php include "./includes/navigation.php"?>
+
+
     <!-- Page Content -->
     <div class="container">
 
@@ -65,13 +68,16 @@ error_reporting(E_ALL);
                     <img class="img-responsive" src="images/<?php echo $post_image?>" alt="">
                     <hr>
                     <p><?php  echo $post_content; ?></p>
+                    <?php  echo userLikeThisPost($the_post_id);?>
+                    <div class="row text-right"><a href="#" class="<?php echo userLikeThisPost($the_post_id) ? '
+                    unlike':' like' ?>"><span class="glyphicon "></span><?php echo userLikeThisPost($the_post_id) ? 'unlike':' like' ?></a></div>
 
+                    <div class="row text-right">Likes:<?php getPostLikes($the_post_id);?></div>
+                    <div class="clearfix"></div>
                 <?php   }}
                 }else{
                     header("Location: index.php");
                 }
-
-
                 ?>
             </div>
 
@@ -137,10 +143,7 @@ error_reporting(E_ALL);
                             <button type="submit" name="create_comment" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-
-
-
-            <!-- Comment -->
+                <!-- Comment -->
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -154,9 +157,7 @@ error_reporting(E_ALL);
             </div>
 
             <?php
-
-
-            $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} 
+                $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} 
                AND comment_status = 'approved'
                 ORDER BY comment_id DESC";
             $select_comments=
@@ -199,10 +200,93 @@ error_reporting(E_ALL);
         <?php include "./includes/sidebar.php"?>
        </div>
 
+        <?php
+        if(isset($_POST['liked'])){
+            echo "<h1>Like is Works</h1>";
+        }
+        ?>
 
+        <?php
+        if(isset($_POST['liked'])){
+            $post_id =  $_POST['post_id'];
+            $user_id =  $_POST['user_id'];
+
+            $query ="SELECT * FROM posts WHERE post_id=".$post_id."";
+
+            $searchPost =mysqli_query($connect,$query);
+
+            $post = mysqli_fetch_array($searchPost);
+            $likes = $post['likes'];
+
+            if (mysqli_num_rows($searchPost)>=1){
+                echo $post['post_id'];
+            }
+
+            mysqli_query($connect,"UPDATE posts SET likes=$likes+1 WHERE post_id=$post_id");
+
+            mysqli_query($connect,"INSERT INTO likes(user_id, post_id)VALUES($user_id, $post_id) ");
+
+                exit();
+        }
+        if(isset($_POST['unliked'])){
+            $post_id =  $_POST['post_id'];
+            $user_id =  $_POST['user_id'];
+
+            $query ="SELECT * FROM posts WHERE post_id=".$post_id."";
+
+            $searchPost =mysqli_query($connect,$query);
+
+            $post = mysqli_fetch_array($searchPost);
+            $likes = $post['likes'];
+
+
+            mysqli_query($connect,"UPDATE posts SET likes=$likes-1 WHERE post_id=$post_id");
+
+            mysqli_query($connect,"DELETE FROM likes WHERE post_id=$post_id AND user_id=$user_id");
+
+            exit();
+        }
+        ?>
 
 
     <!-- /.row -->
     <!-- Footer -->
 
 <?php include "./includes/footer.php"?>
+
+            <script>
+                $(document).ready(function () {
+                    let post_id =<?php echo $the_post_id; ?>;
+                    let user_id =<?php echo loggedInUserId() ;?>
+
+                   //Liked
+                    $(".like").click(function () {
+                     //Liking
+                        $.ajax({
+                            url:"/cms2/post.php?p_id=<?php echo $the_post_id?>",
+                            type:'post',
+                            data:{
+                                'liked':1,
+                                'post_id':post_id,
+                                 'user_id': user_id
+                            }
+                        })
+
+                   });
+                    //UnLiked
+                    $(".unlike").click(function () {
+                        //Liking
+                        $.ajax({
+                            url:"/cms2/post.php?p_id=<?php echo $the_post_id?>",
+                            type:'post',
+                            data:{
+                                'unliked':1,
+                                'post_id':post_id,
+                                'user_id': user_id
+                            }
+                        })
+
+                    });
+
+                })
+            </script>

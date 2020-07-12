@@ -10,6 +10,16 @@ function confirm($result){
         die('QUERY FAILED'.mysqli_error($connect));
     }
 }
+
+function query($query){
+    global $connect;
+    $res = mysqli_query($connect,$query);
+    if(!confirm($res)){
+        return $res;
+    }
+}
+
+
 function redirect($location){
     header("Location:".$location);
     exit;
@@ -23,10 +33,34 @@ function ifItIsMethod($method=null){
 }
 
 function isLoggedIn(){
+
     if(isset($_SESSION['user_role'])){
         return true;
     }
     return  false;
+}
+
+function loggedInUserId(){
+
+    if (isLoggedIn()){
+        $result = query("SELECT * FROM users WHERE user_name= '". $_SESSION['username']."'");
+        $user = mysqli_fetch_array($result);
+        if (mysqli_num_rows($result)>=1){
+            return $user['user_id'];
+        }
+    }
+    return  false;
+}
+
+function userLikeThisPost($post_id = ''){
+    $user_id = loggedInUserId();
+    //var_dump($user_id);
+    //var_dump($post_id);
+
+    $result = query("SELECT * FROM likes WHERE  user_id=$user_id AND post_id= $post_id");
+
+   // var_dump($result);
+    return mysqli_num_rows($result)>=1 ? true : false;
 }
 
 function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
@@ -209,10 +243,14 @@ function login_user($username, $password){
         $db_user_role = $row['user_role'];
 
         if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
+            echo "Loged";
+
             $_SESSION['username'] = $db_user_name;
             $_SESSION['firstname'] = $db_user_first_name;
             $_SESSION['lastname'] = $db_user_last_name;
             $_SESSION['user_role'] = $db_user_role;
+            var_dump($_SESSION);
+
 
             redirect("/cms2/admin");
         } else {
@@ -220,5 +258,12 @@ function login_user($username, $password){
         }
     }
     return  true;
+}
+
+
+function getPostLikes($post_id){
+    $result = query("SELECT * FROM likes
+ WHERE  post_id = $post_id");
+    echo mysqli_num_rows($result);
 }
 
