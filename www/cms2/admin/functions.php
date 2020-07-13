@@ -1,5 +1,6 @@
 <?php
 
+//====DATABASE HELPERS===//
 function escape($string){
     global $connect;
     return mysqli_real_escape_string($connect, trim($string));
@@ -17,20 +18,60 @@ function query($query){
     if(!confirm($res)){
         return $res;
     }
-}
 
-
-function redirect($location){
-    header("Location:".$location);
-    exit;
-}
-
-function ifItIsMethod($method=null){
-    if($_SERVER['REQUEST_METHOD']===strtoupper($method)){
-        return true;
+    function countRecord($result){
+            mysqli_num_rows($result);
     }
-    return  false;
 }
+//====END DATABASE HELPERS===//
+//====GENERAL HELPERS===//
+    function get_user_name(){
+        return isset($_SESSION['username'])?$_SESSION['username']:null;
+    }
+
+    function get_all_posts_user_comments(){
+    $result = query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id 
+            WHERE posts.post_user_id=".loggedInUserId());
+    return $result;
+    }
+
+//====END GENERAL HELPERS===//
+
+//====USER SPECIFIC HELPERS===//
+function get_all_user_post(){
+    return $result = query("SELECT * FROM posts WHERE post_user_id =".loggedInUserId());
+}
+
+function get_all_user_categories(){
+    return $result = query("SELECT * FROM categories WHERE user_id =".loggedInUserId());
+}
+
+function get_all_users_published_posts(){
+    return $result = query("SELECT * FROM posts WHERE post_user_id =".loggedInUserId().
+        " AND post_status= 'published'");
+}
+function get_all_users_draft_posts(){
+    return $result = query("SELECT * FROM posts WHERE post_user_id =".loggedInUserId().
+        " AND post_status= 'draft'");
+}
+
+function get_all_upproved_posts_comments(){
+    $result = query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id 
+            WHERE posts.post_user_id=".loggedInUserId()." AND comment_status ='unapproved'");
+    return $result;
+
+}
+
+function get_all_unupproved_posts_comments(){
+    $result = query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id 
+            WHERE posts.post_user_id=".loggedInUserId()." AND comment_status ='unapproved'");
+    return $result;
+
+}
+
+//====END USER SPECIFIC HELPERS===//
+
+//===AUTHENTICATIONS HELPERS==//
 
 function isLoggedIn(){
 
@@ -52,14 +93,94 @@ function loggedInUserId(){
     return  false;
 }
 
+function is_admin(){
+    if(isLoggedIn()){
+
+        $result = query("SELECT user_role FROM users WHERE user_id = ".$_SESSION['user_id']."");
+        $row  = mysqli_fetch_array($result);
+        if($row['user_role']=='admin'){
+            return true;
+        }else{
+            return false;
+        }
+        return false;
+    }
+}
+
+function register_user($username, $email, $password){
+    global $connect;
+    if(is_exist($username,"user_name","users")){
+        $message ="User ".$username." exists";
+    }else{
+        $username = mysqli_real_escape_string($connect,$username);
+        $email =  mysqli_real_escape_string($connect,$email);
+        $password =  mysqli_real_escape_string($connect,$password);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>10));
+        $query = "INSERT INTO `users`( `user_name`, `user_password`, `user_email`, `user_role`) 
+                      VALUES ('{$username}','{$password}','{$email}','subscriber')";
+        $register_user_query = mysqli_query($connect,$query);
+        confirm($register_user_query);
+        login_user($username, $password);
+
+    }
+}
+
+function login_user($username, $password){
+    global  $connect;
+    $username =trim($username);
+    $password =trim($password);
+    $username = mysqli_real_escape_string($connect, $username);
+    $password = mysqli_real_escape_string($connect, $password);
+    $query = "SELECT * FROM users WHERE user_name = '{$username}' ";
+    $select_user_query = mysqli_query($connect, $query);
+    confirm($select_user_query);
+    while ($row = mysqli_fetch_array($select_user_query)) {
+        $db_user_id = $row['user_id'];
+        $db_user_name = $row['user_name'];
+        $db_user_password = $row['user_password'];
+        $db_user_first_name = $row['user_first_name'];
+        $db_user_last_name = $row['user_last_name'];
+        $db_user_role = $row['user_role'];
+
+        if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
+            echo "Loged";
+            $_SESSION['user_id'] = $db_user_id;
+            $_SESSION['username'] = $db_user_name;
+            $_SESSION['firstname'] = $db_user_first_name;
+            $_SESSION['lastname'] = $db_user_last_name;
+            $_SESSION['user_role'] = $db_user_role;
+            var_dump($_SESSION);
+
+
+            redirect("/cms2/admin");
+        } else {
+            return false;
+        }
+    }
+    return  true;
+}
+
+
+
+//==END AUTHENTICATIONS HELPERS==//
+
+function redirect($location){
+    header("Location:".$location);
+    exit;
+}
+
+function ifItIsMethod($method=null){
+    if($_SERVER['REQUEST_METHOD']===strtoupper($method)){
+        return true;
+    }
+    return  false;
+}
+
+
+
 function userLikeThisPost($post_id = ''){
     $user_id = loggedInUserId();
-    //var_dump($user_id);
-    //var_dump($post_id);
-
     $result = query("SELECT * FROM likes WHERE  user_id=$user_id AND post_id= $post_id");
-
-   // var_dump($result);
     return mysqli_num_rows($result)>=1 ? true : false;
 }
 
@@ -147,6 +268,13 @@ function deleteCategories(){
     }
 }
 
+function count_record($result){
+  if($result){
+      return mysqli_num_rows($result);
+  }
+
+}
+
 function recordCount($table){
    global $connect;
     $query = "SELECT * FROM $table";
@@ -164,18 +292,7 @@ function checkStatus($table, $column, $status){
     return  mysqli_num_rows($result);
 }
 
-function is_admin($username = ''){
-    global $connect;
-    $query = "SELECT user_role FROM users WHERE user_name = '$username'";
-    $result = mysqli_query($connect, $query);
-    confirm($result);
-    $row  = mysqli_fetch_array($result);
-    if($row['user_role']=='admin'){
-        return true;
-    }else{
-        return false;
-    }
-}
+
 
 function email_exists($email){
     global $connect;
@@ -204,63 +321,6 @@ function is_exist($value,$philds, $table){
         return false;
     }
 }
-
-
-
-function register_user($username, $email, $password){
-    global $connect;
-    if(is_exist($username,"user_name","users")){
-            $message ="User ".$username." exists";
-        }else{
-            $username = mysqli_real_escape_string($connect,$username);
-            $email =  mysqli_real_escape_string($connect,$email);
-            $password =  mysqli_real_escape_string($connect,$password);
-            $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=>10));
-                $query = "INSERT INTO `users`( `user_name`, `user_password`, `user_email`, `user_role`) 
-                      VALUES ('{$username}','{$password}','{$email}','subscriber')";
-                $register_user_query = mysqli_query($connect,$query);
-                confirm($register_user_query);
-                login_user($username, $password);
-
-        }
-}
-
-function login_user($username, $password){
-    global  $connect;
-    $username =trim($username);
-    $password =trim($password);
-    $username = mysqli_real_escape_string($connect, $username);
-    $password = mysqli_real_escape_string($connect, $password);
-    $query = "SELECT * FROM users WHERE user_name = '{$username}' ";
-    $select_user_query = mysqli_query($connect, $query);
-     confirm($select_user_query);
-    while ($row = mysqli_fetch_array($select_user_query)) {
-        $db_user_id = $row['user_id'];
-        $db_user_name = $row['user_name'];
-        $db_user_password = $row['user_password'];
-        $db_user_first_name = $row['user_first_name'];
-        $db_user_last_name = $row['user_last_name'];
-        $db_user_role = $row['user_role'];
-
-        if ($username === $db_user_name && password_verify($password, $db_user_password) == 1) {
-            echo "Loged";
-
-            $_SESSION['username'] = $db_user_name;
-            $_SESSION['firstname'] = $db_user_first_name;
-            $_SESSION['lastname'] = $db_user_last_name;
-            $_SESSION['user_role'] = $db_user_role;
-            var_dump($_SESSION);
-
-
-            redirect("/cms2/admin");
-        } else {
-            return false;
-        }
-    }
-    return  true;
-}
-
-
 function getPostLikes($post_id){
     $result = query("SELECT * FROM likes
  WHERE  post_id = $post_id");

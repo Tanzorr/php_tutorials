@@ -19,10 +19,11 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 
   }
     if(isset($_POST['update'])){
-        //var_dump($_POST);
+
         $post_title = $_POST['title'];
         $post_author = $_POST['author'];
          $post_category = (int)$_POST['post_category_id'];
+         $post_user_id =(int)$_POST['post_user'];
 
         $post_image =$_FILES['image']['name'];
         $post_image_temp = $_FILES['image']['tmp_name'];
@@ -49,6 +50,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 
         $query = "UPDATE `posts` SET 
                         `post_category_id`='{$post_category}',
+                        `post_user_id`='{$post_user_id}',
                         `post_title`='{$post_title}',
                         `post_author`='{$post_author}',
                         `post_image`='{$post_image}',
@@ -108,7 +110,7 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
                         while($row = mysqli_fetch_assoc($select_users)) {
                             $user_id = $row['user_id'];
                             $username = $row['user_name'];
-                            echo "<option value='{$username}'>{$username}</option>";
+                            echo "<option value='{$user_id}'>{$username}</option>";
                         }
                         ?>
 
