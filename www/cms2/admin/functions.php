@@ -57,7 +57,7 @@ function get_all_users_draft_posts(){
 
 function get_all_upproved_posts_comments(){
     $result = query("SELECT * FROM posts INNER JOIN comments ON posts.post_id = comments.comment_post_id 
-            WHERE posts.post_user_id=".loggedInUserId()." AND comment_status ='unapproved'");
+            WHERE posts.post_user_id=".loggedInUserId()." AND comment_status ='approved'");
     return $result;
 
 }

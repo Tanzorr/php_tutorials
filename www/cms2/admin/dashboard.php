@@ -143,8 +143,9 @@ if($_SESSION['user_role']!=='admin'){
                 $post_counts =count_record(get_all_user_post());
                 $post_published_counts = count_record(get_all_users_published_posts());
                 $post_draft_counts = count_record(get_all_users_draft_posts());
-                $comments_unapproved_counts = checkStatus("comments",'comment_status','approved');
-                $users_subscriber_count = checkStatus("users",'user_role','admin');
+                $comments_unapproved_counts = count_record(get_all_unupproved_posts_comments());
+                $comments_approved_counts = count_record(get_all_upproved_posts_comments());
+
                 ?>
                 <!--Chart row-->
                 <div class="row">
@@ -157,10 +158,12 @@ if($_SESSION['user_role']!=='admin'){
                                 ['Date', 'Count'],
                                 <?php
                                 $element_text = ["All posts",'Active Posts','Draft Posts','Comments',
-                                    'Panding Comments'
-                                    ,'Categories'];
+                                    'Upproved Comments',
+                                    'UnUpproved Comments',
+                                    'Categories'];
                                 $element_count = [$post_counts,$post_published_counts,$post_draft_counts, $comments_counts,
                                     $comments_unapproved_counts,
+                                    $comments_approved_counts,
                                     $categories_counts];
                                 for ($i =0; $i < count($element_count); ++$i){
                                     echo "['{$element_text[$i]}'".","."'{$element_count[$i]}'],";
