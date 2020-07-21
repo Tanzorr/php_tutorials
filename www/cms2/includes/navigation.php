@@ -55,6 +55,8 @@
 
                      <li class="<?php echo $registration_class ?>"><a href='/cms2/registration'>Registration</a></li>
                      <li class="<?php echo $contact_class ?>"><a href='/cms2/contact'>Contact</a></li>
+                     <li ><a href='/cms2/lend_test.php'>land_test</a></li>
+                     <li ><a href='/cms2/covid_api.php'>covid_app</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

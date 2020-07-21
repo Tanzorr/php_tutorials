@@ -1,0 +1,309 @@
+<?php
+ob_start();
+
+
+
+if (isset($_POST['send'])){
+    $to = "cto@appsidedev.com";
+    $from = $_POST['email'];
+    $subject = "Message from landing ";
+    $body = " This data from  https://obsachfebeadelo.ru/ name ". $_POST['username']." email: ".$_POST['email'];
+
+    mail("alexx1984@ukr.net", $subject,$body,$from);
+
+}
+
+/* Установка внутренней кодировки в UTF-8 */
+mb_internal_encoding("UTF-8");
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<!-- Общее Дело -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Потрать всего 5 минут, мест осталось не много!</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&amp;subset=cyrillic,cyrillic-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lend_test.css">
+    <!-- Yandex.Metrika counter obsachfebeadelo.ru -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(64980856, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/64980856" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter --> </head>
+
+<body class="main-body">
+<style>
+    .offer_row input {
+        display: inline-block;
+        width: auto;
+        float: left;
+        margin: 0;
+        margin-right: 5px;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .offer_row span {
+        font-size: 11px;
+        line-height: 14px;
+        font-family: sans-serif;
+        color: #333;
+        position: relative;
+        top: -1px;
+        display: block;
+    }
+
+    .offer_row {
+        max-width: 400px;
+        text-align: left;
+        position: relative;
+        margin-top: 15px;
+        padding: 5px;
+        background-color: rgba(0,0,0,.5);
+        border-radius: 5px;
+    }
+
+
+    .flex_form_wr .button{
+        justify-content: center;
+    }
+</style>
+<div class="modal_wr">
+    <div class="closing"></div>
+    <div class="modal_close_wr">
+        <a href="#" class="close"></a>
+        <div class="modal_cont">
+            <div class="modal__close">
+                <a href="#"></a>
+            </div>
+            <div class="modal__title">
+                Настало время перемен к лучшему!
+                <br>
+            </div>
+            <div class="modal__form">
+                <div class="modal__signature">
+
+                </div>
+                <div class="modal__form_title">
+                    Пройдите регистрацию и начните жить лучше уже сегодня!
+                </div>
+                <form action="" method="post">
+                    <div class="main__form_field modal__form_field">
+                        <i class="fas fa-user-circle"></i>
+                        <input type="text" placeholder="Ваше имя" id="name_modal" name="username">
+                    </div>
+                    <div class="main__form_field modal__form_field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Ваш актуальный e-mail" id="email_modal" name="email"
+                               required>
+                    </div>
+                    <div class="header__button">
+                        <button id="yes_btn">
+                            Я готов к финансовой независимости!
+                        </button>
+                        <div class="col-xs-12 offer_row" style="background-color: #fff;">
+                            <input type="checkbox" name="oferta" checked="">
+                            <span>Я согласен на обработку персональных данных и получение
+                                    рекламных материалов, и я согласен с <a href="/policy.html" target="_blank">публичной офертой</a> </span>
+                        </div>
+                    </div>
+            </div>
+            </form>
+            <div class="modal__form_items flex">
+                <img src="https://obsachfebeadelo.ru/img/reg-footer-item-one.png" alt="">
+                <img src="https://obsachfebeadelo.ru/img/reg-footer-item-two.png" alt="">
+                <img src="https://obsachfebeadelo.ru/img/reg-footer-item-three.png" alt="">
+                <img src="https://obsachfebeadelo.ru/img/reg-footer-item-four.png" alt="">
+                <img src="https://obsachfebeadelo.ru/img/reg-footer-item-five.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="main_stat">
+    <div class="main_stat_block online">
+        <div class="num">
+            133            </div>
+        <div class="text">
+            <span>Смотрят</span>
+            страницу
+        </div>
+    </div>
+    <div class="main_stat_block lasts">
+        <div class="num">
+            20            </div>
+        <div class="text">
+            осталось
+            <span>мест</span>
+        </div>
+    </div>
+</div>
+
+<div class="main_logo">
+    <a href="#">
+        <img src="/images/land_img/main-logo.png" alt="Общее дело">
+    </a>
+</div>
+
+<div class="container">
+    <h1>Торопись и проходи абсолютно бесплатную регистрацию и начни жить лучше уже сегодня!</h1>
+
+    <div class="main_player">
+        <!-- //player('HbfKnXamK_Q'); -->
+
+        <style>
+            .embed-responsive .volume {
+                position: absolute;
+                /* padding: 20 40px; */
+                width: 160px;
+                height: 140px;
+                top: calc(50% - 70px);
+                left: calc(50% - 80px);
+                z-index: 1;
+                background: rgba(0, 0, 0, .5);
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                cursor: pointer;
+                animation: pulse 1s linear infinite;
+            }
+
+            .embed-responsive .volume p {
+                color: #fff;
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            .embed-responsive .volume i {
+                color: #fff;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1, 1);
+                }
+
+                50% {
+                    transform: scale(1.1, 1.1);
+                }
+
+                100% {
+                    transform: scale(1, 1);
+                }
+            }
+        </style>
+        <div class="embed-responsive embed-responsive-16by9">
+            <div class="volume"
+                 onclick="document.querySelector('video').muted = false; this.style.display = 'none'">
+                <i class="fas fa-5x fa-volume-up unmute-btn"></i>
+                <p>Включить звук</p>
+            </div>
+            <video width="620" height="370" oncontextmenu="return false;" autoplay muted
+                   controls=true>
+                <source src="https://obsachfebeadelo.ru/video/i.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div class="flex_form_wr">
+
+        <form class="flex_form container" action="lend_test.php" method="post">
+            <div class="row inputs">
+                <div class="col-md-6">
+                    <i class="fas fa-user-circle"></i>
+                    <input type="text" name="username" id="name" placeholder="Ваше имя">
+                    <input type="hidden" name="send">
+                </div>
+                <div class="col-md-6">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" id="email" placeholder="Ваш актуальный e-mail" required></div>
+            </div>
+            <div class="row button">
+                <div class="col-md-12">
+                    <button class="button_yes">
+                        Да, я готов стать на путь к успеху!
+                    </button>
+                </div>
+                <div class="col-xs-12 offer_row" style="margin-top: 20px">
+                    <input type="checkbox" name="oferta" checked="">
+                    <span style="color: #fff;">Я согласен на обработку персональных данных и получение рекламных материалов, и я согласен
+                            с  <a href="/policy.html" target="_blank">публичной офертой</a></span>
+                </div>
+            </div>
+
+        </form>
+        <div class="logos_wr">
+            <ul class="flex_list">
+                <li><img src="https://obsachfebeadelo.ru/img/main-footer-item-one.png" alt=""> </li>
+                <li><img src="https://obsachfebeadelo.ru/img/main-footer-item-two.png" alt=""> </li>
+                <li><img src="https://obsachfebeadelo.ru/img/main-footer-item-three.png" alt=""> </li>
+                <li><img src="https://obsachfebeadelo.ru/img/main-footer-item-four.png" alt=""> </li>
+                <li><img src="https://obsachfebeadelo.ru/img/main-footer-item-five.png" alt=""> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="container">
+        <ul class="menu_footer">
+            <li><a href="policy.html">Политика конфиденциальности</a></li>
+            <li><a href="agreement.html">Пользовательское соглашение</a></li>
+        </ul>
+        <div class="copyright">Copyright © 2020 – Общее дело</div>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main_land.js"></script>
+<script>
+
+    function send_data(username, email,send) {
+        $.post("lend_test.php",
+            {
+                username,
+                email,
+                send
+            }
+        )
+    }
+
+    $(document).ready(function () {
+
+        $("#yes_btn").click(function (e) {
+                e.preventDefault()
+              console.log($("#name_modal").val())
+
+                send_data($("#name_modal").val(), $("#email_modal").val(),"send")
+            location.reload()
+            }
+        )
+    })
+
+
+</script>
+</body>
+
+</html>

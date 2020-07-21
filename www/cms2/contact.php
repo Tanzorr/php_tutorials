@@ -10,8 +10,6 @@ if (isset($_POST['submit'])){
 
     mail("alexx1984@ukr.net", $subject,$body,$from);
 
-
-
 }
 ?>
 

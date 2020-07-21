@@ -327,3 +327,5 @@ function getPostLikes($post_id){
     echo mysqli_num_rows($result);
 }
 
+
+
