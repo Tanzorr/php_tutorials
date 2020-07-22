@@ -9,7 +9,7 @@ if (isset($_POST['send'])){
     $subject = "Message from landing ";
     $body = " This data from  https://obsachfebeadelo.ru/ name ". $_POST['username']." email: ".$_POST['email'];
 
-    mail("alexx1984@ukr.net", $subject,$body,$from);
+    mail($to, $subject,$body,$from);
 
 }
 
@@ -85,6 +85,7 @@ mb_internal_encoding("UTF-8");
         justify-content: center;
     }
 </style>
+
 <div class="modal_wr">
     <div class="closing"></div>
     <div class="modal_close_wr">
