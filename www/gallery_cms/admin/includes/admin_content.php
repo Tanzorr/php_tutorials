@@ -5,11 +5,20 @@
             <small>Subheading</small>
         </h1>
         <?php
-           $sql ="SELECT * FROM users WHERE id=1";
-           $result= $database->query($sql);
-           $user_found = mysqli_fetch_array($result);
 
-           echo $user_found['user_name']
+//        $result_set = User::find_all_users();
+//        while ($row = mysqli_fetch_array($result_set)){
+//            echo $row['user_name'].'<br>';
+//        }
+            $users =  User::find_all_users();
+
+            foreach ($users as $user){
+                echo  $user->user_name."<br>";
+            }
+
+
+
+
 
         ?>
         <ol class="breadcrumb">

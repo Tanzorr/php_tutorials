@@ -22,7 +22,7 @@ class Database{
         $this->confirm_query($result);
         return $result;
     }
-    private function confirm_query($result){
+    public function confirm_query($result){
         if(!$result){
             die("Query Failed".$this->connect->error);
         }
