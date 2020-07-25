@@ -35,11 +35,6 @@ class User
 
         $password =$database->escape_string($password);
 
-
-        echo $username;
-        echo "<br>";
-        echo $password;
-
         $sql= "SELECT * FROM users WHERE user_name ='{$username}' AND password = '{$password}'";
 
         $the_result_array = self::find_this_query($sql);
@@ -64,6 +59,27 @@ class User
 
     }
 
+    public function create(){
+        global $database;
+        $userName=$database->escape_string($this->username);
+        $userPass=$database->escape_string($this->password);
+        $userFName=$database->escape_string($this->first_name);
+        $userLastName =$database->escape_string($this->last_name);
+        $sql = "INSERT INTO users (user_name, password, first_name, last_name)";
+        $sql .=" VALUES('{$userName}','{$userPass}','{$userFName}','{$userLastName}')";
+
+
+
+
+
+        if ($database->query($sql)){
+            $this->id = $database->the_insert_id();
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 
 

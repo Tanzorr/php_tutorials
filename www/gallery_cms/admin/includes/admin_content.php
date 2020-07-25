@@ -5,14 +5,13 @@
             <small>Subheading</small>
         </h1>
         <?php
-        $user =  User::find_user_by_id(1);
-       echo $user->user_name;
+            $user = new User();
+            $user->username = "Vasil";
+            $user->password = "123";
+            $user->first_name = "Vasil";
+            $user->last_name = "Ivanov";
 
-
-
-
-
-
+            $user->create();
         ?>
         <ol class="breadcrumb">
             <li>
