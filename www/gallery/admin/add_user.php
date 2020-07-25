@@ -6,7 +6,7 @@
 
 
 
-$user = new User();
+$user = new user();
 
 if(isset($_POST['create'])) {
 

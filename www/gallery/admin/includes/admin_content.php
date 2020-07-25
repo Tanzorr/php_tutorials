@@ -67,7 +67,7 @@
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo User::count_all(); ?>
+                                        <div class="huge"><?php echo user::count_all(); ?>
 
                                         </div>
 

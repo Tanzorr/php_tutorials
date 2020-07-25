@@ -4,7 +4,7 @@
 
 <?php 
 
-$users = User::find_all();
+$users = user::find_all();
 
  ?>
 

@@ -15,10 +15,8 @@ class User
     }
 
     public static function find_user_by_id($user_id){
-        $found_user = self::find_this_query("SELECT * FROM `users`WHERE id=$user_id");
-
-
-        return $found_user;
+        $the_result_array = self::find_this_query("SELECT * FROM `users`WHERE id= $user_id LIMIT 1");
+        return !empty($the_result_array)? array_shift($the_result_array):false;
     }
 
     public static function find_this_query($sql){
@@ -28,8 +26,24 @@ class User
          while ($row = mysqli_fetch_array($result_set)){
              $the_object_array[]=self::instantation($row);
          }
-
          return $the_object_array;
+    }
+
+    public static function verify_user($username, $password){
+        global $database;
+       $username=$database->escape_string($username);
+
+        $password =$database->escape_string($password);
+
+
+        echo $username;
+        echo "<br>";
+        echo $password;
+
+        $sql= "SELECT * FROM users WHERE user_name ='{$username}' AND password = '{$password}'";
+
+        $the_result_array = self::find_this_query($sql);
+        return !empty($the_result_array)?array_shift($the_result_array):false;
     }
 
     public static function instantation($the_record){
