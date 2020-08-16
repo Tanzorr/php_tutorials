@@ -61,26 +61,44 @@ class User
 
     public function create(){
         global $database;
-        $userName=$database->escape_string($this->username);
+        $userName=$database->escape_string($this->user_name);
         $userPass=$database->escape_string($this->password);
         $userFName=$database->escape_string($this->first_name);
         $userLastName =$database->escape_string($this->last_name);
         $sql = "INSERT INTO users (user_name, password, first_name, last_name)";
         $sql .=" VALUES('{$userName}','{$userPass}','{$userFName}','{$userLastName}')";
-
-
-
-
-
         if ($database->query($sql)){
             $this->id = $database->the_insert_id();
             return true;
         }else{
+            echo "Error";
             return false;
         }
 
+    }//end cewate
+
+    public function update(){
+        global $database;
+
+        $userName=$database->escape_string($this->username);
+        $userPass=$database->escape_string($this->password);
+        $userFName=$database->escape_string($this->first_name);
+        $userLastName =$database->escape_string($this->last_name);
+        $sql = "UPDATE users SET  user_name ='{$userName}', password = '{$userPass}', 
+                first_name ='{$userFName}', last_name = '{$userLastName}' WHERE id= $this->id";
+        $database->query($sql);
+
+        return (mysqli_affected_rows($database->connect) == 1) ? true :false;
+
     }
 
+    public function delete()
+    {
+        global $database;
 
+        $sql = "DELETE FROM `users` WHERE id =".$database->escape_string($this->id);
+        $database->query($sql);
+        return (mysqli_affected_rows($database->connect) == 1) ? true :false;
+    }
 
 }

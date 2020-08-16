@@ -8,7 +8,9 @@
                            Admin
                             <small>Dashboard</small>
                         </h1>
+                        <?php
 
+                        ?>
 
             <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -123,29 +125,6 @@
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                   
-                
 
                     </div>
                 </div>
