@@ -5,19 +5,21 @@
             <small>Subheading</small>
         </h1>
         <?php
-//            $user = new User();
-//            $user->user_name = "Vasil2";
-//            $user->password = "123";
-//            $user->first_name = "Vasil";
-//            $user->last_name = "Ivanov";
-//         $user->create();
+            $user = new User();
+            $user->user_name = "Vasil2";
+            $user->password = "123";
+            $user->first_name = "Vasil";
+            $user->last_name = "Ivanov";
+            $user->create();
 
 
-             $user = User::find_user_by_id(7);
-          //   $user->last_name ="WILLIAMS13";
-            // $user->update();
+//             $user = User::find_user_by_id(3);
+//             $user->user_name = "WhatAwerNew";
+//             $user->password = "WhatAwerNew";
+//             $user->last_name ="WILLIAMSNEw";
+//             $user->update();
 
-        $user->delete();
+       // $user->delete();
 
 
         ?>
