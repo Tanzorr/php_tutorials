@@ -6,11 +6,8 @@
         </h1>
         <?php
             $user = new User();
-            $user->user_name = "Vasil2";
-            $user->password = "123";
-            $user->first_name = "Vasil";
-            $user->last_name = "Ivanov";
-            $user->create();
+            $user->user_name= "Edvin 45";
+            $user->save();
 
 
 //             $user = User::find_user_by_id(3);
@@ -20,6 +17,14 @@
 //             $user->update();
 
        // $user->delete();
+
+//        $users = User::find_all();
+//        //var_dump($users);
+//        echo 'Use';
+//        foreach ($users as $user) {
+//            //var_dump($user);
+//            echo $user->user_name;
+//        }
 
 
         ?>
