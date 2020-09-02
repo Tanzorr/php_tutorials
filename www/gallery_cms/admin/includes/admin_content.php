@@ -5,16 +5,16 @@
             <small>Subheading</small>
         </h1>
         <?php
-            $user = new User();
-            $user->user_name= "Edvin 45";
-            $user->save();
 
+//        $photos = Photo::find_all();
+//            foreach ($photos as $photo) {
+//                echo $photo->title;
+//            }
 
-//             $user = User::find_user_by_id(3);
-//             $user->user_name = "WhatAwerNew";
-//             $user->password = "WhatAwerNew";
-//             $user->last_name ="WILLIAMSNEw";
-//             $user->update();
+//        $photo = new Photo();
+//        $photo->title = "Photo title 2";
+//        $photo->save();
+        echo INCLUDES_PATH;
 
        // $user->delete();
 

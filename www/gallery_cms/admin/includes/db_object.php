@@ -45,10 +45,13 @@ class Db_object
     public function create(){
         global $database;
         $properties = $this->properties();
+        array_shift($properties);
         $sql = "INSERT INTO ".static::$db_table." (".implode(",",array_keys($properties)) .")";
-        $sql .="VALUES('".implode("','",array_values($properties))."')";
+        $sql .=" VALUES('".implode("','",array_values($properties))."')";
+
         if ($database->query($sql)){
             $this->id = $database->the_insert_id();
+            var_dump($database->the_insert_id());
             return true;
         }else{
             echo "Error";
