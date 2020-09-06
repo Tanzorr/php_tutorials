@@ -3,7 +3,6 @@
 (!$session->is_signed_in()){
     redirect("login.php");
 }?>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +25,24 @@
     <div id="page-wrapper">
 
         <div class="container-fluid">
+            <?php
+                $message = "";
+            if (isset($_POST['submit'])) {
+               $photo = new Photo();
+               $photo->title = $_POST['title'];
+               $photo->set_file($_FILES['file_upload']);
+               if ($photo->save()) {
+                   $message = "Photo uploaded Successfully";
+               }else {
+                   var_dump($photo);
+                   if(count($photo->errors)>2){
+                       $message = join("<br>", $photo->errors);
+                   }
 
+               }
+
+            }
+            ?>
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
@@ -35,14 +51,8 @@
                         <small>Subheading</small>
                     </h1>
                     <div class="col-md-6">
+                        <?php echo $message; ?>
                         <form action="upload.php" method="post" enctype="multipart/form-data">
-                            <?php
-                            echo "test";
-                            var_dump($_POST);
-                            if (isset($_POST['submit'])) {
-                                echo "<h1>Hello</h1>";
-                            }
-                            ?>
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control">
                             </div>

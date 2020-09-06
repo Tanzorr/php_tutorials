@@ -1,9 +1,7 @@
 <?php
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
-defined('SITE_ROOT') ? null : define('SITE_ROOT', DS. 'www'.DS.'gallery_cms');
+defined('SITE_ROOT') ? null : define('SITE_ROOT', DS. 'www'.DS.'html'.DS.'gallery_cms');
 defined('INCLUDES_PATCH') ? null : define('INCLUDES_PATH', SITE_ROOT. DS.'admin'.DS.'includes');
-
-
 require_once("functions.php");
 require_once("new_config.php");
 require_once("database.php");
