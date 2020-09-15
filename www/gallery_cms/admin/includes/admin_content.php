@@ -6,14 +6,6 @@
         </h1>
         <?php
 
-        $user = Photo::find_by_id(1);
-        var_dump($user);
-        echo $user->filename;
-
-//        $photos = Photo::find_all();
-//            foreach ($photos as $photo) {
-//                echo $photo->title;
-//            }
 
 //        $photo = new Photo();
 //        $photo->title = "Photo title 2";
