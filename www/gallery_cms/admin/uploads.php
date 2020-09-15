@@ -37,8 +37,6 @@
                     <div class="col-md-6">
                         <form action="upload.php" method="post" enctype="multipart/form-data">
                             <?php
-                            echo "test";
-                            var_dump($_POST);
                             if (isset($_POST['submit'])) {
                                 echo "<h1>Hello</h1>";
                             }

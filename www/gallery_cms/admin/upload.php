@@ -34,7 +34,6 @@
                if ($photo->save()) {
                    $message = "Photo uploaded Successfully";
                }else {
-                   var_dump($photo);
                    if(count($photo->errors)>2){
                        $message = join("<br>", $photo->errors);
                    }
