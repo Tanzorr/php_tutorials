@@ -52,7 +52,7 @@
                                         <img src="./<?php echo $photo->picture_path();?>" alt="<?php echo $photo->filename?>" width="50" class="img-thumbnail" >
                                         <div class="pictures_link">
                                             <a href="delete_photo.php/?id=<?php echo $photo->id?>">Delete</a>
-                                            <a href="#">Edit</a>
+                                            <a href="edit_photo.php/?id=<?php echo $photo->id?>">Edit</a>
                                             <a href="#">Vie</a>
                                         </div>
                                     </td>

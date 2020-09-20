@@ -2,7 +2,7 @@
 
 <?php 
 
-$photos = Photo::find_all();
+$photos = User::find_all();
 
 
  ?>

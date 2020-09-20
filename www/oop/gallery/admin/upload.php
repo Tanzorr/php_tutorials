@@ -8,13 +8,13 @@
 $message = "";
 if(isset($_FILES['file'])) { 
 
-$photo = new Photo();
+$photo = new User();
 $photo->title = $_POST['title'];
 $photo->set_file($_FILES['file']);
 
 if($photo->save()) {
 
-$message = "Photo {$photo->filename} uploaded sucessfully"; 
+$message = "User {$photo->filename} uploaded sucessfully";
 
 
 } else {

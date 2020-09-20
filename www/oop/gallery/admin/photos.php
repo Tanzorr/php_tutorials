@@ -4,7 +4,7 @@
 
 <?php 
 
-$photos = Photo::find_all();
+$photos = User::find_all();
 
 
  ?>
@@ -42,7 +42,7 @@ $photos = Photo::find_all();
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Photos
+                            Users
                             <small></small>
                         </h1>
 
@@ -55,7 +55,7 @@ $photos = Photo::find_all();
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Photo</th>
+                                        <th>User</th>
                                         <th>Id</th>
                                         <th>File Name</th>
                                         <th>Tittle</th>

@@ -7,8 +7,8 @@
         <?php
 
 
-//        $photo = new Photo();
-//        $photo->title = "Photo title 2";
+//        $photo = new User();
+//        $photo->title = "User title 2";
 //        $photo->save();
 
 

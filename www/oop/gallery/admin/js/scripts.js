@@ -89,7 +89,7 @@ $("#set_user_image").click(function(){
 
 
 
-/*************Edit Photo side bar************/
+/*************Edit User side bar************/
 
 
 

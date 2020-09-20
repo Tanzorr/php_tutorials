@@ -2,7 +2,7 @@
 
 
 
-class Photo extends Db_object {
+class User extends Db_object {
 
 
 	protected static $db_table = "photos";
@@ -166,7 +166,7 @@ class Photo extends Db_object {
 	public static function display_sidebar_data($photo_id) {
 
 
-		$photo = Photo::find_by_id($photo_id);
+		$photo = User::find_by_id($photo_id);
 
 
 		$output = "<a class='thumbnail' href='#'><img width='100' src='{$photo->picture_path()}' ></a> ";

@@ -38,7 +38,7 @@ $result = mysqli_query($mysql, 'SELECT full_name, email, photo FROM mailinglist 
 foreach ($result as $row) { //This iterator syntax only works in PHP 5.4+
     $mail->addAddress($row['email'], $row['full_name']);
     if (!empty($row['photo'])) {
-        $mail->addStringAttachment($row['photo'], 'YourPhoto.jpg'); //Assumes the image data is stored in the DB
+        $mail->addStringAttachment($row['photo'], 'YourUser.jpg'); //Assumes the image data is stored in the DB
     }
 
     if (!$mail->send()) {

@@ -59,7 +59,7 @@ $users = user::find_all();
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Photo</th>
+                                        <th>User</th>
                                         <th>Username</th>
                                         <th>First Name</th>
                                         <th>Last Name </th>

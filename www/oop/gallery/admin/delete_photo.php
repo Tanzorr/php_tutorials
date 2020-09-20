@@ -12,7 +12,7 @@ redirect("photos.php");
 
 }
 
-$photo = Photo::find_by_id($_GET['id']);
+$photo = User::find_by_id($_GET['id']);
 
 if($photo) {
 

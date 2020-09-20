@@ -43,14 +43,14 @@
                                         <i class="fa fa-photo fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge"><?php echo Photo::count_all(); ?></div>
-                                        <div>Photos</div>
+                                        <div class="huge"><?php echo User::count_all(); ?></div>
+                                        <div>Users</div>
                                     </div>
                                 </div>
                             </div>
                             <a href="photos.php">
                                 <div class="panel-footer">
-                                    <span class="pull-left">Total Photos in Gallery</span>
+                                    <span class="pull-left">Total Users in Gallery</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                     <div class="clearfix"></div>
                                 </div>

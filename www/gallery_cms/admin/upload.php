@@ -28,11 +28,11 @@
             <?php
                 $message = "";
             if (isset($_POST['submit'])) {
-               $photo = new Photo();
+               $photo = new User();
                $photo->title = $_POST['title'];
                $photo->set_file($_FILES['file_upload']);
                if ($photo->save()) {
-                   $message = "Photo uploaded Successfully";
+                   $message = "User uploaded Successfully";
                }else {
                    if(count($photo->errors)>2){
                        $message = join("<br>", $photo->errors);
