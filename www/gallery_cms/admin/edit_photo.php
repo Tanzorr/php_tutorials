@@ -28,14 +28,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Users
+                        Photos
                         <small>Subheading</small>
                     </h1>
                     <?php
                             if (empty($_GET['id'])) {
                                 redirect("photos.php");
                             } else {
-                                $photo = User::find_by_id($_GET['id']);
+                                $photo = Photo::find_by_id($_GET['id']);
 
                                 if(isset($_POST['update'])){
                                     if($photo){
@@ -44,7 +44,7 @@
                                        $photo->alternate_text = $_POST['alternate_text'];
                                        $photo->description =  $_POST['description'];
                                         $photo->update();
-                                       var_dump(get_class_methods ($photo));
+
                                     }
                                 }
                             }
@@ -57,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <a href="#">
-                                    <img class="thumbnail" src="<?php echo $photo->picture_path()?>" alt=""/>
+                                    <img class="thubnail" src="<?php echo $photo->picture_path()?>" alt=""/>
                                 </a>
                             </div>
 
@@ -71,7 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="caption">Description</label>
-                                <textarea cols="30" rows="10" name="description" class="form-control textarea_editor">
+                                <textarea cols="30" rows="10" name="description" class="form-control">
                                     <?php echo $photo->description;?>"
                                 </textarea>
                             </div>
@@ -87,7 +87,7 @@
                                             <span class="glyphicon glyphicon-calendar"></span> Uploaded on: April 22, 2030 @ 5:26
                                         </p>
                                         <p class="text ">
-                                            User Id: <span class="data photo_id_box">34</span>
+                                            Photo Id: <span class="data photo_id_box">34</span>
                                         </p>
                                         <p class="text">
                                             Filename: <span class="data">image.jpg</span>

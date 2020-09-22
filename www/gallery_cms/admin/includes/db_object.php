@@ -36,35 +36,35 @@ class Db_object
 
     public function save_with_image()
     {
-        if ($this->photo_id) {
+        if ($this->id) {
             $this->update();
         } else {
 //            if (empty($this->errors)) {
 //                return false;
 //            }
 
-            if (empty($this->filename) || empty($this->tmp_path)){
+            if (empty($this->filename) || empty($this->tmp_path)) {
                 $this->errors[] = "the file was not availabel";
                 return false;
             }
-            $tmp_path = DS.'var'.DS.SITE_ROOT . DS . 'admin' . DS . $this->upload_directory.DS.$this->filename ;
+            $tmp_path = DS . 'var' . DS . SITE_ROOT . DS . 'admin' . DS . $this->upload_directory . DS . $this->filename;
             if (file_exists($tmp_path)) {
                 $this->errors[] = "The file {$this->filename} already exists";
                 return false;
             }
-            if(move_uploaded_file($this->tmp_path, $tmp_path)){
+            if (move_uploaded_file($this->tmp_path, $tmp_path)) {
                 if ($this->create()) {
                     unset($this->tmp_path);
-                    return  true;
+                    return true;
                 }
-            }else {
+            } else {
                 $this->errors[] = "the file directory probably does not have permission";
-                return  false;
+                return false;
             }
 
         }
-
     }
+
 
     public static function find_all(){
         return static::find_by_query("SELECT * FROM ".static::$db_table." ");
