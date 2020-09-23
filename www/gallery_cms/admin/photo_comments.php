@@ -5,8 +5,6 @@ if (empty($_GET['id'])){
     redirect('photos.php');
 }
 $comments = Comment::find_the_comments($_GET['id']);
-
-
 ?>
 
     <!-- Navigation -->
@@ -38,7 +36,6 @@ $comments = Comment::find_the_comments($_GET['id']);
                     <h1 class="page-header">
                         Comments
                     </h1>
-                    <a href="add_Comment.php" class="btn btn-primary">Add Comment</a>
                     <div class="col-md-12">
                         <table class="table table-hover">
                             <thead>
@@ -51,14 +48,14 @@ $comments = Comment::find_the_comments($_GET['id']);
                             </thead>
                             <tbody>
                             <?php
-                            $Comments = Comment::find_all();
-                            foreach ($Comments as $Comment){
+
+                            foreach ($comments as $Comment){
                                 ?>
                                 <tr>
                                     <td><?php echo $Comment->id;?></td>
                                     <td><?php echo $Comment->photo_id;?>
                                         <div class="actions_link">
-                                            <a href="delete_comment.php?id=<?php echo $Comment->id?>">Delete</a>
+                                            <a href="delete_commetn_photo.php?id=<?php echo $Comment->id?>">Delete</a>
 
                                         </div>
                                     </td>

@@ -2,7 +2,7 @@
 
 
 
-class Comments extends Db_object {
+class Comment extends Db_object {
 
     protected static $db_table = "comments";
     protected static $db_table_fields = array('id', 'photo_id', 'author','body');
@@ -24,9 +24,9 @@ class Comments extends Db_object {
     }
 
     public static function find_the_comments($photo_id = 0) {
-        $sql = "SELECT * FROM ".self::$db_table;
-        $sql .= "WHERE photo_id = ".$photo_id;
-        $sql .= "ORDER BY photo_id ASC";
+        global $database;
+        $sql = "SELECT * FROM ".self::$db_table." 
+        WHERE photo_id = ".$photo_id;
         return self::find_by_query($sql);
     }
 
