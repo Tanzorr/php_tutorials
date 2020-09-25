@@ -167,6 +167,15 @@ class Db_object
         return (mysqli_affected_rows($database->connect) == 1) ? true :false;
     }
 
+    public static function count_all(){
+        global $database;
+        $sql = "SELECT COUNT(*) FROM ". static::$db_table;
+        $result_set = $database->query($sql);
+        $row = mysqli_fetch_row($result_set);
+        return array_shift($row);
+    }
+
+
 
 
 }
