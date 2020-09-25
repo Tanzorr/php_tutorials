@@ -68,6 +68,14 @@
                         if ($paginate->has_prev()) {
                             echo "<li><a href='index.php?page={$paginate->prev()}' class='next'>Prev</a></li>";
                         }
+                            for ($i=1; $i<=$paginate->page_total(); $i++){
+                                if ($i == $paginate->current_page) {
+                                    echo "<li class='active'><a href='index.php?page={$i}'>$i</a></li>";
+                                }else{
+                                    echo "<li><a href='index.php?page={$i}'>$i</a></li>";
+                                }
+                            }
+
                         if ($paginate->has_next()) {
                             echo "<li><a href='index.php?page={$paginate->next()}' class='next'>Next</a></li>";
                         }
