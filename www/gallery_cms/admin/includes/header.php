@@ -31,6 +31,7 @@
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
@@ -41,7 +42,8 @@
                 ['Views',     <?php echo $session->count; ?>],
                 ['Comments',      <?php echo Comment::count_all(); ?>],
                 ['Users',  <?php echo User::count_all(); ?>],
-                ['Photos', <?php echo Photo::count_all(); ?>],
+                ['Photos', <?php echo Photo::count_all();?>],
+                []
             ]);
 
             var options = {
@@ -56,6 +58,7 @@
             chart.draw(data, options);
         }
     </script>
+
 
 </head>
 

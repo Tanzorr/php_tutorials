@@ -26,6 +26,18 @@ class Photo extends Db_object
         }
     }
 
+    public function ajax_save_photo_image($photo_image, $photo_id) {
+        global $database;
+        echo "ajax rquest";
+         $this->filename = $photo_image = $database->escape_string($photo_image);
+         $this->id = $photo_id = $database->escape_string($photo_id);
+         $sql = "UPDATE ".self::$db_table. " SET filename = '{$this->filename}' WHERE id = '{$this->id}'";
+         var_dump($sql);
+         $update_image = $database->query($sql);
+
+         echo $this->picture_path();
+    }
+
 
 
 }

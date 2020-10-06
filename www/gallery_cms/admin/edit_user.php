@@ -57,8 +57,13 @@
                         }
 
                     ?>
+
+
+
                     <div class="col-md-6">
-                        <img class="img-responsive" src="<?php echo $user->image_path_and_placeholder()?>" alt="">
+
+                            <img class="img-responsive" src="<?php echo $user->image_path_and_placeholder()?>" alt="">
+                        </a>
                     </div>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="col-md-6">

@@ -111,6 +111,7 @@ class Db_object
         $sql = "INSERT INTO ".static::$db_table." (".implode(",",array_keys($properties)) .")";
         $sql .=" VALUES('".implode("','",array_values($properties))."')";
         if ($database->query($sql)){
+
             $this->id = $database->the_insert_id();
             return true;
         }else{
@@ -130,6 +131,7 @@ class Db_object
         $sql = "UPDATE ".static::$db_table." SET ".
             implode(", ", $properties_pairs)
             ." WHERE id = ". $database->escape_string($this->id);
+
         $database->query($sql);
         return (mysqli_affected_rows($database->connect) == 1) ? true :false;
     }

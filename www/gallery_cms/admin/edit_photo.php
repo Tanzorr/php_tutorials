@@ -31,11 +31,13 @@
                         Photos
                         <small>Subheading</small>
                     </h1>
+                    <?php include('includes/photo_modal.php');?>
                     <?php
                             if (empty($_GET['id'])) {
                                 redirect("photos.php");
                             } else {
                                 $photo = Photo::find_by_id($_GET['id']);
+                                echo $photo->title;
 
                                 if(isset($_POST['update'])){
                                     if($photo){
@@ -50,14 +52,15 @@
                             }
 
                             ?>
+
                     <form action="" method="post">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control" value="<?php echo $photo->title;?>"/>
+                                <input type="text" name="title" class="form-control" value="<?php  echo $photo->title;?>"/>
                             </div>
-                            <div class="form-group">
-                                <a href="#">
-                                    <img class="thubnail" src="<?php echo $photo->picture_path()?>" alt=""/>
+                            <div class="form-group photo_image_box">
+                                <a data-toggle="modal" data-target="#photo-library">
+                                    <img class="thubnail" width ="200" src="<?php echo $photo->picture_path()?>" alt=""/>
                                 </a>
                             </div>
 
@@ -101,7 +104,7 @@
                                     </div>
                                     <div class="info-box-footer clearfix">
                                         <div class="info-box-delete pull-left">
-                                            <a  href="delete_photo.php?id=<?php echo $photo->id; ?>" class="btn btn-danger btn-lg ">Delete</a>
+                                            <a id="photo_id"  href="delete_photo.php?id=<?php echo $photo->id; ?>" class="btn btn-danger btn-lg ">Delete</a>
                                         </div>
                                         <div class="info-box-update pull-right ">
                                             <input type="submit" name="update" value="Update" class="btn btn-primary btn-lg "/>
