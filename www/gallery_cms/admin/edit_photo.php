@@ -37,15 +37,18 @@
                                 redirect("photos.php");
                             } else {
                                 $photo = Photo::find_by_id($_GET['id']);
-                                echo $photo->title;
 
-                                if(isset($_POST['update'])){
+                            if(isset($_POST['update'])){
+
                                     if($photo){
-                                       $photo->title = $_POST['title'];
+                                        $photo->title = $_POST['title'];
                                        $photo->caption =  $_POST['caption'];
                                        $photo->alternate_text = $_POST['alternate_text'];
                                        $photo->description =  $_POST['description'];
+                                        $_SESSION['message'] = "Photo Edited";
                                         $photo->update();
+
+                                        redirect("photos.php");
 
                                     }
                                 }

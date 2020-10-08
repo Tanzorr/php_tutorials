@@ -27,9 +27,20 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
+                    <p class="bg-success text-center"><?php
+                        $photo = new Photo();
+                        var_dump(get_class_methods($photo));
+                        if (!empty($_SESSION['message'])){
+                            echo $_SESSION['message'];
+                        }else {
+
+                        $photo->message;
+                        }
+                        ?></p>
                     <h1 class="page-header">
                         Photos
                     </h1>
+
                     <div class="col-md-12">
                         <table class="table table-hover">
                             <thead>

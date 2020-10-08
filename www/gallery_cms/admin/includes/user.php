@@ -35,10 +35,22 @@ class User extends Db_object
         if ($this->delete()){
             $target_path = DS.'var'.SITE_ROOT.DS.'admin'.DS.$this->image_path_and_placeholder();
             return unlink($target_path) ? true : false;
+            $this->delete_photo();
         }else{
             return false;
         }
     }
+
+    public function delete_photo() {
+        if($this->delete()) {
+            $target_path = DS.'var'.SITE_ROOT.DS.'admin'.DS.$this->picture_path();
+            var_dump($target_path);
+            die();
+            return unlink($target_path) ? true : false;
+        }
+    }
+
+
 
     public function ajax_save_user_image($user_image, $user_id) {
         $this->user_image = $user_image;

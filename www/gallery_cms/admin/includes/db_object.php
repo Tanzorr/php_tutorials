@@ -7,6 +7,7 @@ class Db_object
     public $tmp_path;
     public $upload_directory = "images";
     public $errors = array();
+    public $message;
     public $upload_errors_array = array(
         UPLOAD_ERR_OK => "There is no error",
         UPLOAD_ERR_INI_SIZE => "The uploaded file execeeds the upload_max_filesize directive",
@@ -17,6 +18,30 @@ class Db_object
         UPLOAD_ERR_CANT_WRITE => "Failed to write file to disk.",
         UPLOAD_ERR_EXTENSION => "A PHP extension stopped the file upload."
     );
+
+    public function __construct(){
+        $this->check_edit_notification();
+    }
+
+    public function edit_notification($msg = "") {
+
+        if(!empty($msg)){
+            $_SESSION['message']=$msg;
+        }else{
+            return $this->message;
+        }
+    }
+
+    public function check_edit_notification(){
+
+        if(isset($_SESSION['message'])){
+            $this->message = $_SESSION['message'];
+            unset($_SESSION['message']);
+        }else{
+            $this->message ="";
+        }
+    }
+
 
     public function set_file($file)
     {
@@ -176,6 +201,8 @@ class Db_object
         $row = mysqli_fetch_row($result_set);
         return array_shift($row);
     }
+
+
 
 
 

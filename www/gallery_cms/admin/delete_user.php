@@ -1,4 +1,4 @@
-<?php include("includes/init.php");?>
+<?php include("../init.php");?>
 <?php if (!$session->is_signed_in()) {redirect('login.php');};?>
 <?php
 if(empty($_GET['id'])) {
@@ -7,6 +7,8 @@ if(empty($_GET['id'])) {
 $user = User::find_by_id($_GET['id']);
 if ($user) {
     $user->delete();
+    $user->delete_photo();
+    $session->message("user {$user->usre_name} is deleted");
     redirect('users.php');
 }else {
     redirect('users.php');
