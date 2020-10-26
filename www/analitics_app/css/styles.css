@@ -1,0 +1,18 @@
+html,body {
+    height:100%;
+}
+.full-height {
+    height: 100%;
+}
+
+
+.home_page_photo {
+    width: 200px;
+}
+
+/**paginage styles **/
+
+.active a{
+    background-color:#000!important;
+    color: #fff!important;
+}

@@ -1,4 +1,19 @@
 $(document).ready(function (){
+    /**Edit Phot Sidebar**/
+    $(".info-box-header").click(function () {
+        $(".inside").slideToggle("fast");
+        $("#toggle").toggleClass("glyphicon-menu-up glyphicon, glyphicon-menu-up, glyphicon");
+    });
+
+    /**end Edit Phot Sidebar**/
+
+    /*** Delete Function  ***/
+    $(".delete_link").click(function () {
+       return  confirm("Are you shure you whant to delete");
+    });
+    /***and Delete Function  ***/
+
+
     let photo_href;
     let photo_href_splitted;
     let photo_id;
