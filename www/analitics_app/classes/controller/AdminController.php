@@ -20,6 +20,25 @@ class AdminController
           }
         }
 
+        public function deleteUser($id) {
+            $user = new User();
+            $user = $user->find_by_id($id);
+            $user->delete();
+            $user->redirect( $_SERVER['HTTP_REFERER']);
+        }
+
+        public function allActions() {
+            $action = new Action();
+            return $action->find_all();
+        }
+
+        public function getUser($id) {
+            $user = new User();
+            $user = $user->find_by_id($id);
+            return $user;
+        }
+
+
         public function addAction($request) {
             if (!empty( $request['name']) ) {
                 $action = new Action();
@@ -27,6 +46,19 @@ class AdminController
                 $action->create();
                 $action->redirect('add_action.php');
             }
+        }
+
+        public function deleteActon($id) {
+            $action =  new Action();
+            $action = $action->find_by_id($id);
+            $action->delete();
+            $action->redirect( $_SERVER['HTTP_REFERER']);
+        }
+
+        public function getAllUsersActions ($user_id) {
+            $user_actions = new Services();
+            $user_actions = $user_actions->getUsersAction($user_id);
+            return $user_actions;
         }
 
 

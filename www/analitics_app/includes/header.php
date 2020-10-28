@@ -1,15 +1,17 @@
+<?php ob_start(); ?>
+<?php include ('init.php'); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <?php include ('jeneral_header.php');?>
 
 </head>
 
-<body>
+<body class="h-100">
 
 
 
 
 <!-- Page Content -->
-<div class="container">
+<div class="container h-100">
